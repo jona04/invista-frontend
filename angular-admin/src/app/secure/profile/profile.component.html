@@ -1,0 +1,22 @@
+<div class="content">
+
+  <form [formGroup]="infoForm" class="form-signin" (submit)="infoSubmit()">
+    <h1>Info</h1>
+
+    <input formControlName="first_name" class="form-control" placeholder="Primeiro nome" required>
+    <input formControlName="last_name" class="form-control" placeholder="Ultimo nome" required>
+    <input formControlName="email" type="email" class="form-control" placeholder="Email address" required>
+
+    <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+  </form>
+
+
+    <form [formGroup]="passwordForm" class="form-signin mt-5" (submit)="passwordSubmit()">
+      <h1>Password</h1>
+
+      <input formControlName="password" type="password" class="form-control" placeholder="Senha" required>
+      <input formControlName="password_confirm" type="password"  class="form-control" placeholder="Confirmar senha" required>
+
+      <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+    </form>
+    </div>
