@@ -9,6 +9,10 @@ import { UserComponent } from './user/user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ClientesComponent } from './clientes/clientes.component';
+import { ClientesFormComponent } from './clientes/clientes-form/clientes-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     NavComponent,
     MenuComponent,
     ProfileComponent,
-    UserComponent
+    UserComponent,
+    ClientesComponent,
+    ClientesFormComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +30,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class SecureModule { }

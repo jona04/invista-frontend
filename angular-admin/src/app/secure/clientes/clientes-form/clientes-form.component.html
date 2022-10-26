@@ -1,0 +1,75 @@
+<form [formGroup]="form" class="" (submit)="submit()">
+    <h1>Cliente</h1>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Nome</mat-label>
+            <input formControlName="nome" matInput placeholder="Nome">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput placeholder="Email">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Telefone</mat-label>
+            <input formControlName="telefone" matInput placeholder="Telefone">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Cpf</mat-label>
+            <input formControlName="cpf" matInput placeholder="Cpf">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Rua</mat-label>
+            <input formControlName="rua" matInput placeholder="Rua">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Bairro</mat-label>
+            <input formControlName="bairro" matInput placeholder="Bairro">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Numero</mat-label>
+            <input formControlName="numero" matInput placeholder="Numero">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Cidade</mat-label>
+            <input formControlName="cidade" matInput placeholder="Cidade">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Estado</mat-label>
+            <input formControlName="estado" matInput placeholder="Estado">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Cep</mat-label>
+            <input formControlName="cep" matInput placeholder="Cep">
+        </mat-form-field>
+    </div>
+    
+    <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+  </form>
