@@ -64,18 +64,19 @@
   <ng-container matColumnDef="Acoes">
     <th mat-header-cell *matHeaderCellDef> Acoes </th>
     <td mat-cell *matCellDef="let cliente">
-      <a [routerLink]="['/clientes', cliente.id, 'edit']" mat-stroked-button color="primary" >Editar</a>
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle [routerLink]="['/clientes', cliente.id, 'edit']">Editar</mat-button-toggle>
+        <mat-button-toggle (click)="delete(cliente.id)">Deletar</mat-button-toggle>
+      </mat-button-toggle-group>
     </td>
   </ng-container>
-
 
   <tr mat-header-row *matHeaderRowDef="columns"></tr>
   <tr mat-row *matRowDef="let row; columns: columns;"></tr>
 </table>
-  
+
   <mat-paginator [length]="totalClientes"
                 [pageSize]="5"
                 [pageSizeOptions]="[5, 10, 20]"
                 aria-label="Select page">
   </mat-paginator>
-  

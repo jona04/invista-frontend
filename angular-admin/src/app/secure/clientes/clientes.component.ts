@@ -1,7 +1,8 @@
+import { ClienteService } from './../../services/cliente.service';
+import { Cliente } from './../../interfaces/cliente';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-clientes',
@@ -29,5 +30,15 @@ export class ClientesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  delete(id: number){
+    if (confirm("Você tem certeza que deseja deletar?")){
+      this.clienteService.delete(id).subscribe(
+        () => {
+          this.dataSource.data = this.dataSource.data.filter((cliente: any) => cliente.id !== id);
+        }
+      )
+    }
   }
 }

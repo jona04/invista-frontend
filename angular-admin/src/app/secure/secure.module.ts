@@ -13,6 +13,9 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { ClientesFormComponent } from './clientes/clientes-form/clientes-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { ServicosComponent } from './servicos/servicos.component';
+import { ServicosFormComponent } from './servicos/servicos-form/servicos-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import {MatInputModule} from '@angular/material/input';
     ProfileComponent,
     UserComponent,
     ClientesComponent,
-    ClientesFormComponent
+    ClientesFormComponent,
+    ServicosComponent,
+    ServicosFormComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +37,8 @@ import {MatInputModule} from '@angular/material/input';
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonToggleModule
   ]
 })
 export class SecureModule { }

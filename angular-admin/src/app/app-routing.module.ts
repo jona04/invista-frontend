@@ -8,6 +8,8 @@ import { ProfileComponent } from './secure/profile/profile.component';
 import { UserComponent } from './secure/user/user.component';
 import { ClientesComponent } from './secure/clientes/clientes.component';
 import { ClientesFormComponent } from './secure/clientes/clientes-form/clientes-form.component';
+import { ServicosFormComponent } from './secure/servicos/servicos-form/servicos-form.component';
+import { ServicosComponent } from './secure/servicos/servicos.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,9 @@ const routes: Routes = [
       {path: 'clientes', component: ClientesComponent},
       {path: 'clientes/criar', component: ClientesFormComponent, data: {create: true}},
       {path: 'clientes/:id/edit', component: ClientesFormComponent, data: {create: false}},
+      {path: 'servicos', component: ServicosComponent},
+      {path: 'servicos/criar', component: ServicosFormComponent, data: {create: true}},
+      {path: 'servicos/:id/edit', component: ServicosFormComponent, data: {create: false}},
     ]
   },
   {

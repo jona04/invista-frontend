@@ -30,4 +30,8 @@ export class ClienteService {
   update(id: number, data: Cliente): Observable<Cliente> {
     return this.http.put<Cliente>(`${this.endpoint}/${id}`, data);
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.endpoint}/${id}`);
+  }
 }
