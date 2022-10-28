@@ -1,1 +1,41 @@
-<p>servicos-form works!</p>
+<form [formGroup]="form" class="" (submit)="submit()">
+    <h1>Servico</h1>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Nome</mat-label>
+            <input formControlName="nome" matInput placeholder="Nome">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Quantidade</mat-label>
+            <input formControlName="quantidade" matInput placeholder="Quantidade">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="fill">
+            <mat-label>Cliente</mat-label>
+            <mat-select formControlName="cliente">
+                <mat-option *ngFor="let cliente of clienteList" [value]="cliente.id">
+                {{cliente.nome}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="fill">
+            <mat-label>Chapa</mat-label>
+            <mat-select formControlName="chapa">
+                <mat-option *ngFor="let chapa of chapaList" [value]="chapa.id">
+                {{chapa.nome}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+  </form>

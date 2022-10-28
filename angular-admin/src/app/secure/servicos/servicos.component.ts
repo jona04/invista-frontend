@@ -14,16 +14,18 @@ export class ServicosComponent implements OnInit, AfterViewInit {
 
   totalServicos: number;
   dataSource = new MatTableDataSource();
-  columns = ['ID', 'Nome', 'Valor Total Servico', 'Criado em', 'Acoes'];
+  columns = ['ID', 'Nome', 'Quantidade', 'Valor Total Servico', 'Criado em', 'Acoes'];
 
   constructor(private servicoService: ServicoService) { }
 
   ngOnInit(): void {
-    this.servicoService.all().subscribe( servicos => {
-      console.log(servicos[0]);
-      this.dataSource.data = servicos;
-      this.totalServicos = servicos.length;
-    })
+    this.servicoService.all().subscribe( 
+      servicos => {
+        console.log("servicos",servicos[0]);
+        this.dataSource.data = servicos;
+        this.totalServicos = servicos.length;
+      }
+    );
   }
 
   ngAfterViewInit(): void {

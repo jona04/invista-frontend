@@ -1,5 +1,4 @@
 import { ClienteService } from './../../services/cliente.service';
-import { Cliente } from './../../interfaces/cliente';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,7 +24,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
         this.dataSource.data = clientes;
         this.totalClientes = clientes.length;
       }
-    )
+    );
   }
 
   ngAfterViewInit(): void {

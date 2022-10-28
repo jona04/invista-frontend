@@ -21,4 +21,16 @@ export class ServicoService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.endpoint}/${id}`);
   }
+
+  get(id: number): Observable<Servico> {
+    return this.http.get<Servico>(`${this.endpoint}/${id}`);
+  }
+
+  create(data: Servico): Observable<Servico> {
+    return this.http.post<Servico>(`${this.endpoint}`, data);
+  }
+
+  update(id: number, data: Servico): Observable<Servico> {
+    return this.http.put<Servico>(`${this.endpoint}/${id}`, data);
+  }
 }

@@ -16,6 +16,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { ServicosComponent } from './servicos/servicos.component';
 import { ServicosFormComponent } from './servicos/servicos-form/servicos-form.component';
+import {MatSelectModule} from '@angular/material/select'; 
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ServicosFormComponent } from './servicos/servicos-form/servicos-form.co
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSelectModule
   ]
 })
 export class SecureModule { }

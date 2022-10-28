@@ -5,7 +5,6 @@
 <table mat-table [dataSource]="dataSource"
       class="table table-striped table-sm tablemat-elevation-z8">
 
-  <!-- Position Column -->
   <ng-container matColumnDef="ID">
     <th mat-header-cell *matHeaderCellDef> # </th>
     <td mat-cell *matCellDef="let servico"> {{servico.id}} </td>
@@ -14,6 +13,11 @@
   <ng-container matColumnDef="Nome">
     <th mat-header-cell *matHeaderCellDef> Nome </th>
     <td mat-cell *matCellDef="let servico"> {{servico.nome}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Quantidade">
+    <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+    <td mat-cell *matCellDef="let servico"> {{servico.quantidade}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Valor Total Servico">
