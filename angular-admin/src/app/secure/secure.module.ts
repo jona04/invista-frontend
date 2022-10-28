@@ -16,7 +16,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { ServicosComponent } from './servicos/servicos.component';
 import { ServicosFormComponent } from './servicos/servicos-form/servicos-form.component';
-import {MatSelectModule} from '@angular/material/select'; 
+import {MatSelectModule} from '@angular/material/select';
+import { NotasComponent } from './notas/notas.component';
+import { NotasFormComponent } from './notas/notas-form/notas-form.component'; 
+import {MatChipsModule} from '@angular/material/chips'; 
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import {MatIconModule} from '@angular/material/icon'; 
 
 @NgModule({
   declarations: [
@@ -29,6 +34,8 @@ import {MatSelectModule} from '@angular/material/select';
     ClientesFormComponent,
     ServicosComponent,
     ServicosFormComponent,
+    NotasComponent,
+    NotasFormComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +47,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatButtonToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatIconModule
   ]
 })
 export class SecureModule { }

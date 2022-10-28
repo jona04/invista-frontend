@@ -10,6 +10,8 @@ import { ClientesComponent } from './secure/clientes/clientes.component';
 import { ClientesFormComponent } from './secure/clientes/clientes-form/clientes-form.component';
 import { ServicosFormComponent } from './secure/servicos/servicos-form/servicos-form.component';
 import { ServicosComponent } from './secure/servicos/servicos.component';
+import { NotasComponent } from './secure/notas/notas.component';
+import { NotasFormComponent } from './secure/notas/notas-form/notas-form.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,9 @@ const routes: Routes = [
       {path: 'servicos', component: ServicosComponent},
       {path: 'servicos/criar', component: ServicosFormComponent, data: {create: true}},
       {path: 'servicos/:id/edit', component: ServicosFormComponent, data: {create: false}},
+      {path: 'notas', component: NotasComponent},
+      {path: 'notas/criar', component: NotasFormComponent, data: {create: true}},
+      {path: 'notas/:id/edit', component: NotasFormComponent, data: {create: false}},
     ]
   },
   {

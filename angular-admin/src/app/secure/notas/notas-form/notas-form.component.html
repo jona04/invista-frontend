@@ -1,0 +1,48 @@
+<form [formGroup]="form" class="" (submit)="submit()">
+    <h1>Nota</h1>
+
+    <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Nota</mat-label>
+        <mat-chip-list #chipList aria-label="Selecionar nota">
+          <mat-chip
+            *ngFor="let nota of notas"
+            (removed)="remove(nota)">
+            {{nota}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="Novo nota..."
+            #notaInput
+            [formControl]="notaCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let nota of filteredNotas | async" [value]="nota">
+            {{nota}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Desconto</mat-label>
+            <input formControlName="desconto" matInput placeholder="Obs">
+        </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+        <mat-form-field appearance="standard">
+            <mat-label>Obs</mat-label>
+            <input formControlName="obs" matInput placeholder="Obs">
+        </mat-form-field>
+    </div>
+
+
+    <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+  </form>

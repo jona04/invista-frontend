@@ -21,7 +21,6 @@ export class ServicosComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.servicoService.all().subscribe( 
       servicos => {
-        console.log("servicos",servicos[0]);
         this.dataSource.data = servicos;
         this.totalServicos = servicos.length;
       }
