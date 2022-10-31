@@ -12,6 +12,7 @@ import { ServicosFormComponent } from './secure/servicos/servicos-form/servicos-
 import { ServicosComponent } from './secure/servicos/servicos.component';
 import { NotasComponent } from './secure/notas/notas.component';
 import { NotasFormComponent } from './secure/notas/notas-form/notas-form.component';
+import { NotasPrintComponent } from './secure/notas/notas-print/notas-print.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
       {path: 'notas/:id/edit', component: NotasFormComponent, data: {create: false}},
     ]
   },
+  {path: 'notas/:id/print', component: NotasPrintComponent},
   {
     path: '',
     component: PublicComponent,

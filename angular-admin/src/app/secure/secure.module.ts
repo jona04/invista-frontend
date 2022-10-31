@@ -21,7 +21,8 @@ import { NotasComponent } from './notas/notas.component';
 import { NotasFormComponent } from './notas/notas-form/notas-form.component'; 
 import {MatChipsModule} from '@angular/material/chips'; 
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
-import {MatIconModule} from '@angular/material/icon'; 
+import {MatIconModule} from '@angular/material/icon';
+import { NotasPrintComponent } from './notas/notas-print/notas-print.component'; 
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {MatIconModule} from '@angular/material/icon';
     ServicosFormComponent,
     NotasComponent,
     NotasFormComponent,
+    NotasPrintComponent,
   ],
   imports: [
     CommonModule,
