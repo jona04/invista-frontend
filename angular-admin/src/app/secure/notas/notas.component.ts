@@ -14,12 +14,12 @@ export class NotasComponent implements OnInit {
 
   totalNotas: number;
   dataSource = new MatTableDataSource();
-  columns = ['ID', 'Numero', 'Valor Total Nota', 'Criado em', 'Obs', 'Desconto', 'Acoes'];
+  columns = ['Numero', 'Valor Total Nota', 'Criado em', 'Obs', 'Desconto', 'Acoes'];
 
   constructor(private notaService: NotaService) { }
 
   ngOnInit(): void {
-    this.notaService.all().subscribe( 
+    this.notaService.allList().subscribe(
       notas => {
         this.dataSource.data = notas;
         this.totalNotas = notas.length;

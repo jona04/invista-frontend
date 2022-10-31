@@ -18,6 +18,10 @@ export class ServicoService {
     return this.http.get<Servico[]>(this.endpoint);
   }
 
+  allList(): Observable<Servico[]> {
+    return this.http.get<Servico[]>(`${this.endpoint}/list`);
+  }
+
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.endpoint}/${id}`);
   }

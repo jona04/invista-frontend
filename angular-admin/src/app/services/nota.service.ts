@@ -15,8 +15,16 @@ export class NotaService {
     this.endpoint = `${environment.api}/notas`;
   }
 
+  getFull(id: number): Observable<Nota> {
+    return this.http.get<Nota>(`${this.endpoint}/full/${id}`);
+  }
+
   all(): Observable<Nota[]> {
     return this.http.get<Nota[]>(this.endpoint);
+  }
+
+  allList(): Observable<Nota[]> {
+    return this.http.get<Nota[]>(`${this.endpoint}/list`);
   }
 
   delete(id: number): Observable<void> {
