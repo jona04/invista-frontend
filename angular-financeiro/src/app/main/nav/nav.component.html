@@ -1,10 +1,7 @@
 <header class="d-flex bd-highlight align-items-center p-3 px-md-4 bg-body border-bottom shadow-sm">
   <p class="h5 mr-auto bd-highlight my-0 me-md-auto fw-normal">
-    <a class="p-1 text-decoration-none">
-      Frontend
-    </a>
-    <a class="p-1 text-decoration-none">
-      Backend
+    <a *ngIf="user" routerLink="/graphs" class="p-1 text-decoration-none">
+      Graficos
     </a>
   </p>
 
