@@ -18,6 +18,10 @@ export class ServicoService {
     return this.http.get<Servico[]>(this.endpoint);
   }
 
+  allBackend(): Observable<any> {
+    return this.http.get<any>(`${this.endpoint}/backend`);
+  }
+
   allList(): Observable<Servico[]> {
     return this.http.get<Servico[]>(`${this.endpoint}/list`);
   }

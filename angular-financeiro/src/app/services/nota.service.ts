@@ -23,6 +23,10 @@ export class NotaService {
     return this.http.get<Nota[]>(this.endpoint);
   }
 
+  allBackend(): Observable<any> {
+    return this.http.get<any>(`${this.endpoint}/backend`);
+  }
+
   allList(): Observable<Nota[]> {
     return this.http.get<Nota[]>(`${this.endpoint}/list`);
   }

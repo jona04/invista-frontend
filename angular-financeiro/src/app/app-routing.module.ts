@@ -7,6 +7,8 @@ import { RegisterComponent } from './public/register/register.component';
 import { GraphsComponent } from './main/secure/graphs/graphs.component';
 import { SecureComponent } from './main/secure/secure.component';
 import { FrontComponent } from './main/front/front.component';
+import { GraphServicosComponent } from './main/secure/graphs/graph-servicos/graph-servicos.component';
+import { GraphNotasComponent } from './main/secure/graphs/graph-notas/graph-notas.component';
 
 const routes: Routes = [
   {
@@ -18,7 +20,13 @@ const routes: Routes = [
         path: '',
         component: SecureComponent,
         children: [
-          {path: 'graphs', component: GraphsComponent}
+          {
+            path: 'graphs', component: GraphsComponent,
+            children: [
+              {path: 'servicos', component: GraphServicosComponent},
+              {path: 'notas', component: GraphNotasComponent}
+            ]
+          }
         ]
       }
     ]

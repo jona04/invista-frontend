@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicoService } from 'src/app/services/servico.service';
+import * as moment from 'moment';
 
 @Component({
-  selector: 'app-graphs',
-  templateUrl: './graphs.component.html',
-  styleUrls: ['./graphs.component.css']
+  selector: 'app-graph-servicos',
+  templateUrl: './graph-servicos.component.html',
+  styleUrls: ['./graph-servicos.component.css']
 })
-export class GraphsComponent implements OnInit {
+export class GraphServicosComponent implements OnInit {
 
   chartOptions: any;
   dataChart: any [];
-  test: any [];
 
   constructor(
     private servicoService: ServicoService
   ) { }
 
   ngOnInit(): void {
+    moment.locale("pt-BR");
+    console.log(moment.now());
     this.getData();
     this.defineChart();
   }
@@ -45,6 +47,7 @@ export class GraphsComponent implements OnInit {
     this.chartOptions = {
       theme: "light2",
       animationEnabled: true,
+      culture: "es",
       zoomEnabled: true,
       title: {
         text: "Serviços realizados"
@@ -64,7 +67,6 @@ export class GraphsComponent implements OnInit {
       },
       data: [{
         type: "line",
-        xValueFormatString: "dd mm YYYY",
         dataPoints: this.dataChart
       }]
     }

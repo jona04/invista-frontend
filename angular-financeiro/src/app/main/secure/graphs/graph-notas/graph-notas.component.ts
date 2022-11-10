@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { NotaService } from 'src/app/services/nota.service';
 import { ServicoService } from 'src/app/services/servico.service';
 
 @Component({
-  selector: 'app-graphs',
-  templateUrl: './graphs.component.html',
-  styleUrls: ['./graphs.component.css']
+  selector: 'app-graph-notas',
+  templateUrl: './graph-notas.component.html',
+  styleUrls: ['./graph-notas.component.css']
 })
-export class GraphsComponent implements OnInit {
+export class GraphNotasComponent implements OnInit {
 
   chartOptions: any;
   dataChart: any [];
-  test: any [];
 
   constructor(
-    private servicoService: ServicoService
+    private notaService: NotaService
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +23,7 @@ export class GraphsComponent implements OnInit {
 
   getData(): void {
     this.dataChart = [];
-    this.servicoService.allBackend().subscribe(
+    this.notaService.allBackend().subscribe(
       result => {
         const chartPointsResult: any [] = result.data;
         chartPointsResult.forEach(
@@ -47,7 +47,7 @@ export class GraphsComponent implements OnInit {
       animationEnabled: true,
       zoomEnabled: true,
       title: {
-        text: "Serviços realizados"
+        text: "Notas emitidas"
       },
       axisX:{
         valueFormatString: "DDD DD/MM/YYYY",
@@ -57,14 +57,13 @@ export class GraphsComponent implements OnInit {
         }
       },
       axisY: {
-        title: "Quantidade de serviços",
+        title: "Quantidade de notas",
         crosshair: {
           enabled: true
         }
       },
       data: [{
         type: "line",
-        xValueFormatString: "dd mm YYYY",
         dataPoints: this.dataChart
       }]
     }
