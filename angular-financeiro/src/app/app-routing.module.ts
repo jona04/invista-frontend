@@ -9,6 +9,7 @@ import { SecureComponent } from './main/secure/secure.component';
 import { FrontComponent } from './main/front/front.component';
 import { GraphServicosComponent } from './main/secure/graphs/graph-servicos/graph-servicos.component';
 import { GraphNotasComponent } from './main/secure/graphs/graph-notas/graph-notas.component';
+import { GraphChapasComponent } from './main/secure/graphs/graph-chapas/graph-chapas.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
             path: 'graphs', component: GraphsComponent,
             children: [
               {path: 'servicos', component: GraphServicosComponent},
-              {path: 'notas', component: GraphNotasComponent}
+              {path: 'notas', component: GraphNotasComponent},
+              {path: 'chapas', component: GraphChapasComponent}
             ]
           }
         ]

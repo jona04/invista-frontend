@@ -12,12 +12,12 @@
 
     <ng-container matColumnDef="Valor Total Nota">
         <th mat-header-cell *matHeaderCellDef> Valor Total Nota </th>
-        <td mat-cell *matCellDef="let nota"> {{nota.valor_total_nota}} </td>
+        <td mat-cell *matCellDef="let nota"> R$ {{nota.valor_total_nota}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Criado em">
         <th mat-header-cell *matHeaderCellDef> Criado em </th>
-        <td mat-cell *matCellDef="let nota"> {{nota.created_at}} </td>
+        <td mat-cell *matCellDef="let nota"> {{nota.created_at | date: 'dd/MM/yyyy HH:MM'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Obs">

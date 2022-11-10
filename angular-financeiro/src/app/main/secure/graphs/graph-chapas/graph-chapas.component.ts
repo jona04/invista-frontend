@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicoService } from 'src/app/services/servico.service';
-import * as moment from 'moment';
+import { ChapaService } from 'src/app/services/chapa.service';
 
 @Component({
-  selector: 'app-graph-servicos',
-  templateUrl: './graph-servicos.component.html',
-  styleUrls: ['./graph-servicos.component.css']
+  selector: 'app-graph-chapas',
+  templateUrl: './graph-chapas.component.html',
+  styleUrls: ['./graph-chapas.component.css']
 })
-export class GraphServicosComponent implements OnInit {
+export class GraphChapasComponent implements OnInit {
 
   chartOptions: any;
   dataChartQuantity: any [];
   dataChartvalue: any [];
 
   constructor(
-    private servicoService: ServicoService
+    private chapaService: ChapaService
   ) { }
 
   ngOnInit(): void {
-    moment.locale("pt-BR");
-    console.log(moment.now());
     this.getData();
     this.defineChart();
   }
@@ -28,11 +25,10 @@ export class GraphServicosComponent implements OnInit {
     this.dataChartQuantity = [];
     this.dataChartvalue = [];
 
-    this.servicoService.allBackend().subscribe(
+    this.chapaService.allBackend().subscribe(
       result => {
-        console.log("result.data",result.data);
-        const chartPointsQuantity: any [] = result.data.servico_quantity_chart;
-        const chartPointsValue: any [] = result.data.servico_value_chart;
+        const chartPointsQuantity: any [] = result.data.chapa_quantity_chart;
+        const chartPointsValue: any [] = result.data.chapa_value_chart;
         chartPointsQuantity.forEach(
           chartPoint => {
             this.dataChartQuantity.push(
@@ -64,7 +60,7 @@ export class GraphServicosComponent implements OnInit {
       animationEnabled: true,
       zoomEnabled: true,
       title: {
-        text: "Servicos emitidas"
+        text: "Chapas impressas"
       },
       axisX:{
         valueFormatString: "DDD DD/MM/YYYY",
@@ -74,7 +70,7 @@ export class GraphServicosComponent implements OnInit {
         }
       },
       axisY: {
-        title: "Quantidade de servicos",
+        title: "Quantidade de chapas",
         includeZero: true
       },
       axisY2: {
@@ -91,7 +87,7 @@ export class GraphServicosComponent implements OnInit {
         },
         {
           type: "line",
-          name: "Quantidade de servicos",
+          name: "Quantidade de chapas",
           showInLegend: true,
           dataPoints: this.dataChartQuantity
         }

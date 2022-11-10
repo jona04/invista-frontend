@@ -17,4 +17,9 @@ export class ChapaService {
   all(): Observable<Chapa[]> {
     return this.http.get<Chapa[]>(this.endpoint);
   }
+
+  allBackend(): Observable<any> {
+    return this.http.get<any>(`${this.endpoint}/backend`);
+  }
+  
 }

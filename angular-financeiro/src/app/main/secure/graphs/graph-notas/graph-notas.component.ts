@@ -10,7 +10,8 @@ import { ServicoService } from 'src/app/services/servico.service';
 export class GraphNotasComponent implements OnInit {
 
   chartOptions: any;
-  dataChart: any [];
+  dataChartQuantity: any [];
+  dataChartvalue: any [];
 
   constructor(
     private notaService: NotaService
@@ -22,13 +23,26 @@ export class GraphNotasComponent implements OnInit {
   }
 
   getData(): void {
-    this.dataChart = [];
+    this.dataChartQuantity = [];
+    this.dataChartvalue = [];
+
     this.notaService.allBackend().subscribe(
       result => {
-        const chartPointsResult: any [] = result.data;
-        chartPointsResult.forEach(
+        const chartPointsQuantity: any [] = result.data.nota_quantity_chart;
+        const chartPointsValue: any [] = result.data.nota_value_chart;
+        chartPointsQuantity.forEach(
           chartPoint => {
-            this.dataChart.push(
+            this.dataChartQuantity.push(
+              {
+                x: new Date(chartPoint.x),
+                y: chartPoint.y
+              }
+            );
+          }
+        );
+        chartPointsValue.forEach(
+          chartPoint => {
+            this.dataChartvalue.push(
               {
                 x: new Date(chartPoint.x),
                 y: chartPoint.y
@@ -58,14 +72,23 @@ export class GraphNotasComponent implements OnInit {
       },
       axisY: {
         title: "Quantidade de notas",
-        crosshair: {
-          enabled: true
-        }
+        includeZero: true
       },
-      data: [{
-        type: "line",
-        dataPoints: this.dataChart
-      }]
+      axisY2: {
+        title: "Total receita",
+        includeZero: true,
+      },
+      data: [
+        {
+          type: "column",
+          axisYType: "secondary",
+          dataPoints: this.dataChartvalue
+        },
+        {
+          type: "line",
+          dataPoints: this.dataChartQuantity
+        }
+      ]
     }
   }
 }

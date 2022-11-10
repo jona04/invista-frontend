@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import * as CanvasJSAngularChart from '../../../assets/canvasjs.angular.component';
 import { GraphServicosComponent } from './graphs/graph-servicos/graph-servicos.component';
 import { GraphNotasComponent } from './graphs/graph-notas/graph-notas.component';
+import { GraphChapasComponent } from './graphs/graph-chapas/graph-chapas.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 
@@ -14,7 +15,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     GraphsComponent,
     CanvasJSChart,
     GraphServicosComponent,
-    GraphNotasComponent
+    GraphNotasComponent,
+    GraphChapasComponent
   ],
   imports: [
     SharedModule

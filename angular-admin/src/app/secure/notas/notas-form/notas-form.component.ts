@@ -66,7 +66,7 @@ export class NotasFormComponent implements OnInit {
 
           this.servicoService.allList().subscribe(
             servicos => {
-              this.allServicos = servicos.slice(0,50);
+              this.allServicos = servicos.slice(0,100);
               this.filteredServicos = this.servicoCtrl.valueChanges.pipe(
                 startWith(null),
                 map((fruit: Servico | null) => (fruit ? this._filter(fruit) : this.allServicos.slice())),
@@ -78,7 +78,7 @@ export class NotasFormComponent implements OnInit {
     }else{
       this.servicoService.allList().subscribe(
         servicos => {
-          this.allServicos = servicos.slice(0,50);
+          this.allServicos = servicos.slice(0,100);
           this.filteredServicos = this.servicoCtrl.valueChanges.pipe(
             startWith(null),
             map((fruit: Servico | null) => (fruit ? this._filter(fruit) : this.allServicos.slice())),
