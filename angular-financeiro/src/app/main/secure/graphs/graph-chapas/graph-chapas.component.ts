@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { ChapaService } from 'src/app/services/chapa.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class GraphChapasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    moment.locale("us");
     this.getData();
     this.defineChart();
   }
@@ -31,9 +33,11 @@ export class GraphChapasComponent implements OnInit {
         const chartPointsValue: any [] = result.data.chapa_value_chart;
         chartPointsQuantity.forEach(
           chartPoint => {
+            let dateTime = new Date(chartPoint.x);
+            dateTime.setHours(dateTime.getHours()+4);
             this.dataChartQuantity.push(
               {
-                x: new Date(chartPoint.x),
+                label: dateTime.toDateString(),
                 y: chartPoint.y
               }
             );
@@ -41,9 +45,11 @@ export class GraphChapasComponent implements OnInit {
         );
         chartPointsValue.forEach(
           chartPoint => {
+            let dateTime = new Date(chartPoint.x);
+            dateTime.setHours(dateTime.getHours()+4);
             this.dataChartvalue.push(
               {
-                x: new Date(chartPoint.x),
+                label: dateTime.toDateString(),
                 y: chartPoint.y
               }
             );

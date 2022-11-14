@@ -32,9 +32,11 @@ export class GraphNotasComponent implements OnInit {
         const chartPointsValue: any [] = result.data.nota_value_chart;
         chartPointsQuantity.forEach(
           chartPoint => {
+            let dateTime = new Date(chartPoint.x);
+            dateTime.setHours(dateTime.getHours()+4);
             this.dataChartQuantity.push(
               {
-                x: new Date(chartPoint.x),
+                label: dateTime.toDateString(),
                 y: chartPoint.y
               }
             );
@@ -42,9 +44,11 @@ export class GraphNotasComponent implements OnInit {
         );
         chartPointsValue.forEach(
           chartPoint => {
+            let dateTime = new Date(chartPoint.x);
+            dateTime.setHours(dateTime.getHours()+4);
             this.dataChartvalue.push(
               {
-                x: new Date(chartPoint.x),
+                label: dateTime.toDateString(),
                 y: chartPoint.y
               }
             );
