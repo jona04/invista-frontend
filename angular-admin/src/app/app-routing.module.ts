@@ -13,13 +13,14 @@ import { ServicosComponent } from './secure/servicos/servicos.component';
 import { NotasComponent } from './secure/notas/notas.component';
 import { NotasFormComponent } from './secure/notas/notas-form/notas-form.component';
 import { NotasPrintComponent } from './secure/notas/notas-print/notas-print.component';
+import { EstoqueComponent } from './secure/estoque/estoque.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SecureComponent,
     children: [
-      {path: '', pathMatch:'full', redirectTo: 'users'},
+      {path: '', pathMatch:'full', redirectTo: 'clientes'},
       {path: 'profile', component: ProfileComponent},
       {path: 'users', component: UserComponent},
       {path: 'clientes', component: ClientesComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
       {path: 'notas', component: NotasComponent},
       {path: 'notas/criar', component: NotasFormComponent, data: {create: true}},
       {path: 'notas/:id/edit', component: NotasFormComponent, data: {create: false}},
+      {path: 'estoque', component: EstoqueComponent},
     ]
   },
   {path: 'notas/:id/print', component: NotasPrintComponent},

@@ -22,7 +22,8 @@ import { NotasFormComponent } from './notas/notas-form/notas-form.component';
 import {MatChipsModule} from '@angular/material/chips'; 
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 import {MatIconModule} from '@angular/material/icon';
-import { NotasPrintComponent } from './notas/notas-print/notas-print.component'; 
+import { NotasPrintComponent } from './notas/notas-print/notas-print.component';
+import { EstoqueComponent } from './estoque/estoque.component'; 
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NotasPrintComponent } from './notas/notas-print/notas-print.component';
     NotasComponent,
     NotasFormComponent,
     NotasPrintComponent,
+    EstoqueComponent,
   ],
   imports: [
     CommonModule,
