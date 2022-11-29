@@ -18,12 +18,21 @@ import { ServicosComponent } from './servicos/servicos.component';
 import { ServicosFormComponent } from './servicos/servicos-form/servicos-form.component';
 import {MatSelectModule} from '@angular/material/select';
 import { NotasComponent } from './notas/notas.component';
-import { NotasFormComponent } from './notas/notas-form/notas-form.component'; 
-import {MatChipsModule} from '@angular/material/chips'; 
-import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import { NotasFormComponent } from './notas/notas-form/notas-form.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatIconModule} from '@angular/material/icon';
 import { NotasPrintComponent } from './notas/notas-print/notas-print.component';
-import { EstoqueComponent } from './estoque/estoque.component'; 
+import { EstoqueComponent } from './estoque/estoque.component';
+import { EntradaComponent } from './estoque/entrada/entrada.component';
+import { SaidaComponent } from './estoque/saida/saida.component';
+import {MatSortModule} from '@angular/material/sort';
+import {MatButtonModule} from '@angular/material/button';
+import { EntradaFormComponent } from './estoque/entrada/entrada-form/entrada-form.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { SaidaFormComponent } from './estoque/saida/saida-form/saida-form.component';
+import { ChapasComponent } from './chapas/chapas.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +49,11 @@ import { EstoqueComponent } from './estoque/estoque.component';
     NotasFormComponent,
     NotasPrintComponent,
     EstoqueComponent,
+    EntradaComponent,
+    SaidaComponent,
+    EntradaFormComponent,
+    SaidaFormComponent,
+    ChapasComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +68,11 @@ import { EstoqueComponent } from './estoque/estoque.component';
     MatSelectModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatIconModule
+    MatIconModule,
+    MatSortModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class SecureModule { }

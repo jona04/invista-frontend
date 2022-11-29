@@ -1,3 +1,4 @@
+import { ChapasComponent } from './secure/chapas/chapas.component';
 import { LoginComponent } from './public/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,6 +15,10 @@ import { NotasComponent } from './secure/notas/notas.component';
 import { NotasFormComponent } from './secure/notas/notas-form/notas-form.component';
 import { NotasPrintComponent } from './secure/notas/notas-print/notas-print.component';
 import { EstoqueComponent } from './secure/estoque/estoque.component';
+import { EntradaComponent } from './secure/estoque/entrada/entrada.component';
+import { SaidaComponent } from './secure/estoque/saida/saida.component';
+import { EntradaFormComponent } from './secure/estoque/entrada/entrada-form/entrada-form.component';
+import { SaidaFormComponent } from './secure/estoque/saida/saida-form/saida-form.component';
 
 const routes: Routes = [
   {
@@ -23,6 +28,7 @@ const routes: Routes = [
       {path: '', pathMatch:'full', redirectTo: 'clientes'},
       {path: 'profile', component: ProfileComponent},
       {path: 'users', component: UserComponent},
+      {path: 'chapas', component: ChapasComponent},
       {path: 'clientes', component: ClientesComponent},
       {path: 'clientes/criar', component: ClientesFormComponent, data: {create: true}},
       {path: 'clientes/:id/edit', component: ClientesFormComponent, data: {create: false}},
@@ -33,6 +39,10 @@ const routes: Routes = [
       {path: 'notas/criar', component: NotasFormComponent, data: {create: true}},
       {path: 'notas/:id/edit', component: NotasFormComponent, data: {create: false}},
       {path: 'estoque', component: EstoqueComponent},
+      {path: 'estoque/entrada', component: EntradaComponent},
+      {path: 'estoque/entrada/criar', component: EntradaFormComponent},
+      {path: 'estoque/saida', component: SaidaComponent},
+      {path: 'estoque/saida/criar', component: SaidaFormComponent},
     ]
   },
   {path: 'notas/:id/print', component: NotasPrintComponent},

@@ -2,21 +2,21 @@
     <h1>Servico</h1>
 
     <div class="mb-3">
-        <mat-form-field appearance="standard">
+        <mat-form-field appearance="standard" class="col-6">
             <mat-label>Nome</mat-label>
             <input formControlName="nome" matInput placeholder="Nome">
         </mat-form-field>
     </div>
 
     <div class="mb-3">
-        <mat-form-field appearance="standard">
+        <mat-form-field appearance="standard" class="col-6">
             <mat-label>Quantidade</mat-label>
             <input formControlName="quantidade" matInput placeholder="Quantidade">
         </mat-form-field>
     </div>
 
     <div class="mb-3">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" class="col-6">
             <mat-label>Cliente</mat-label>
             <mat-select formControlName="cliente">
                 <mat-option *ngFor="let cliente of clienteList" [value]="cliente.id">
@@ -27,7 +27,7 @@
     </div>
 
     <div class="mb-3">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" class="col-6">
             <mat-label>Chapa</mat-label>
             <mat-select formControlName="chapa">
                 <mat-option *ngFor="let chapa of chapaList" [value]="chapa.id">

@@ -1,0 +1,65 @@
+<form [formGroup]="form" class="col-12" (submit)="submit()">
+  <h1>Entrada chapas</h1>
+
+  <div class="mb-3">
+    <mat-form-field appearance="fill" class="col-6">
+        <mat-label>Chapa</mat-label>
+        <mat-select formControlName="chapa">
+            <mat-option *ngFor="let chapa of chapaList" [value]="chapa.id">
+            {{chapa.nome}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+      <mat-form-field appearance="standard" class="col-6">
+          <mat-label>Quantidade</mat-label>
+          <input formControlName="quantidade" type="number" matInput placeholder="Quantidade">
+      </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field appearance="fill" class="col-6">
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="categoria">
+            <mat-option *ngFor="let categoria of categoriaList" [value]="categoria.id">
+            {{categoria.descricao}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field appearance="fill" class="col-6">
+      <mat-label>Escolha a data</mat-label>
+      <input formControlName="data" matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field appearance="standard" class="col-6">
+        <mat-label>Marca</mat-label>
+        <input formControlName="marca" matInput placeholder="Nome">
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field appearance="standard" class="col-6">
+        <mat-label>Valor unitario</mat-label>
+        <input formControlName="valor_unitario" matInput placeholder="Nome">
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field class="col-6">
+      <mat-label>Observações</mat-label>
+      <textarea formControlName="observacao" matInput placeholder="Observacoes"></textarea>
+    </mat-form-field>
+  </div>
+
+  <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+</form>
