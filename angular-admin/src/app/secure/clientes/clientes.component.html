@@ -1,81 +1,85 @@
 <div class="pt-3 pb-2 mb-3 border-bottom">
-  <a routerLink="/clientes/criar" mat-stroked-button color="primary">Adicionar cliente</a>
+  <a routerLink="/clientes/criar" mat-raised-button color="primary">Adicionar cliente</a>
 </div>
 
-<table mat-table [dataSource]="dataSource"
-      class="table table-striped table-sm mat-elevation-z8">
+<div *ngIf="!dataLoaded; else showData" class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<ng-template #showData>
+  <table mat-table [dataSource]="dataSource"
+        class="table table-striped table-sm mat-elevation-z8">
 
-  <ng-container matColumnDef="ID">
-    <th mat-header-cell *matHeaderCellDef> # </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.id}} </td>
-  </ng-container>
+    <ng-container matColumnDef="ID">
+      <th mat-header-cell *matHeaderCellDef> # </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.id}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Nome">
-    <th mat-header-cell *matHeaderCellDef> Nome </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.nome}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Nome">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.nome}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Email">
-    <th mat-header-cell *matHeaderCellDef> Email </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.email}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.email}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Telefone">
-    <th mat-header-cell *matHeaderCellDef> Telefone </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.telefone}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Telefone">
+      <th mat-header-cell *matHeaderCellDef> Telefone </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.telefone}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="CPF">
-    <th mat-header-cell *matHeaderCellDef> CPF </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.cpf}} </td>
-  </ng-container>
+    <ng-container matColumnDef="CPF">
+      <th mat-header-cell *matHeaderCellDef> CPF </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.cpf}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Rua">
-    <th mat-header-cell *matHeaderCellDef> Rua </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.rua}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Rua">
+      <th mat-header-cell *matHeaderCellDef> Rua </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.rua}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Bairro">
-    <th mat-header-cell *matHeaderCellDef> Bairro </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.bairro}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Bairro">
+      <th mat-header-cell *matHeaderCellDef> Bairro </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.bairro}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Numero">
-    <th mat-header-cell *matHeaderCellDef> Numero </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.numero}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Numero">
+      <th mat-header-cell *matHeaderCellDef> Numero </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.numero}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Cidade">
-    <th mat-header-cell *matHeaderCellDef> Cidade </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.cidade}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Cidade">
+      <th mat-header-cell *matHeaderCellDef> Cidade </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.cidade}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Estado">
-    <th mat-header-cell *matHeaderCellDef> Estado </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.estado}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.estado}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Cep">
-    <th mat-header-cell *matHeaderCellDef> Cep </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.cep}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Cep">
+      <th mat-header-cell *matHeaderCellDef> Cep </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.cep}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Acoes">
-    <th mat-header-cell *matHeaderCellDef> Acoes </th>
-    <td mat-cell *matCellDef="let cliente">
-      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle [routerLink]="['/clientes', cliente.id, 'edit']">Editar</mat-button-toggle>
-        <mat-button-toggle (click)="delete(cliente.id)">Deletar</mat-button-toggle>
-      </mat-button-toggle-group>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="Acoes">
+      <th mat-header-cell *matHeaderCellDef> Acoes </th>
+      <td mat-cell *matCellDef="let cliente">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle [routerLink]="['/clientes', cliente.id, 'edit']">Editar</mat-button-toggle>
+          <mat-button-toggle (click)="delete(cliente.id)">Deletar</mat-button-toggle>
+        </mat-button-toggle-group>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-</table>
-
-  <mat-paginator [length]="totalClientes"
-                [pageSize]="20"
-                [pageSizeOptions]="[10, 20, 50, 100]"
-                aria-label="Select page">
-  </mat-paginator>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+</ng-template>
+<mat-paginator [length]="totalClientes"
+                  [pageSize]="20"
+                  [pageSizeOptions]="[10, 20, 50, 100]"
+                  aria-label="Select page">
+</mat-paginator>

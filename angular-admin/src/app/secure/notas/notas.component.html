@@ -1,49 +1,87 @@
+
 <div class="pt-3 pb-2 mb-3 border-bottom">
-  <a routerLink="/notas/criar" mat-stroked-button color="primary">Adicionar nota</a>
+  <a routerLink="/notas/criar" mat-raised-button color="primary">Adicionar nota</a>
 </div>
 
-<table mat-table [dataSource]="dataSource"
-      class="table table-striped table-sm mat-elevation-z8">
+<div class="row">
+  <div class="col-6">
+    <mat-form-field appearance="fill" class="col-12 mt-2">
+      <mat-label>Escolha a data</mat-label>
+      <mat-date-range-input class="col-10 float-left" [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date">
+        <input matEndDate formControlName="end" placeholder="End date">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker" class="float-right"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
 
-  <ng-container matColumnDef="Numero">
-    <th mat-header-cell *matHeaderCellDef> Numero </th>
-    <td mat-cell *matCellDef="let nota"> {{nota.numero}} </td>
-  </ng-container>
+      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-6 mt-4">
+    <button
+      mat-stroked-button
+      color="primary"
+      [disabled]="!dataLoaded"
+      class="mt-1"
+      (click)="updateTable()">Atualizar tabela</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      [disabled]="!dataLoaded"
+      class="mt-1 ml-3"
+      [routerLink]="['relatorio', range.value['start'], range.value['end']]" >Gerar relatório</button>
+  </div>
+</div>
 
-  <ng-container matColumnDef="Valor Total Nota">
-      <th mat-header-cell *matHeaderCellDef> Valor Total Nota </th>
-      <td mat-cell *matCellDef="let nota"> R$ {{nota.valor_total_nota}} </td>
-  </ng-container>
+<div *ngIf="!dataLoaded; else showData" class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<ng-template #showData>
+  <table mat-table [dataSource]="dataSource"
+        class="table table-striped table-sm mat-elevation-z8 mt-2">
 
-  <ng-container matColumnDef="Criado em">
-      <th mat-header-cell *matHeaderCellDef> Criado em </th>
-      <td mat-cell *matCellDef="let nota"> {{nota.created_at | date: 'dd/MM/yyyy HH:MM'}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Numero">
+      <th mat-header-cell *matHeaderCellDef> Numero </th>
+      <td mat-cell *matCellDef="let nota"> {{nota.numero}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Obs">
-      <th mat-header-cell *matHeaderCellDef> Obs </th>
-      <td mat-cell *matCellDef="let nota"> {{nota.obs}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Valor Total Nota">
+        <th mat-header-cell *matHeaderCellDef> Valor Total Nota </th>
+        <td mat-cell *matCellDef="let nota"> R$ {{nota.valor_total_nota}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Desconto">
-      <th mat-header-cell *matHeaderCellDef> Desconto </th>
-      <td mat-cell *matCellDef="let nota"> {{nota.desconto}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Criado em">
+        <th mat-header-cell *matHeaderCellDef> Criado em </th>
+        <td mat-cell *matCellDef="let nota"> {{nota.created_at | date: 'dd/MM/yyyy HH:MM'}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Acoes">
-    <th mat-header-cell *matHeaderCellDef> Acoes </th>
-    <td mat-cell *matCellDef="let nota">
-      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle [routerLink]="['/notas', nota.id, 'print']">Imprimir</mat-button-toggle>
-        <mat-button-toggle [routerLink]="['/notas', nota.id, 'edit']">Editar</mat-button-toggle>
-        <mat-button-toggle (click)="delete(nota.id)">Deletar</mat-button-toggle>
-      </mat-button-toggle-group>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="Obs">
+        <th mat-header-cell *matHeaderCellDef> Obs </th>
+        <td mat-cell *matCellDef="let nota"> {{nota.obs}} </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-</table>
+    <ng-container matColumnDef="Desconto">
+        <th mat-header-cell *matHeaderCellDef> Desconto </th>
+        <td mat-cell *matCellDef="let nota"> {{nota.desconto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Acoes">
+      <th mat-header-cell *matHeaderCellDef> Acoes </th>
+      <td mat-cell *matCellDef="let nota">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle [routerLink]="['/notas', nota.id, 'print']">Imprimir</mat-button-toggle>
+          <mat-button-toggle [routerLink]="['/notas', nota.id, 'edit']">Editar</mat-button-toggle>
+          <mat-button-toggle (click)="delete(nota.id)">Deletar</mat-button-toggle>
+        </mat-button-toggle-group>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+</ng-template>
 
 <mat-paginator [length]="totalNotas"
               [pageSize]="20"

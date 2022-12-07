@@ -9,6 +9,7 @@ import { ChapaService } from 'src/app/services/chapa.service';
   styleUrls: ['./chapas.component.css']
 })
 export class ChapasComponent implements OnInit, AfterViewInit {
+  dataLoaded: boolean;
   totalChapas: number;
   dataSource = new MatTableDataSource();
   columns = ['ID', 'nome', 'valor', 'estoque', 'acoes'];
@@ -18,11 +19,12 @@ export class ChapasComponent implements OnInit, AfterViewInit {
   constructor(private chapaService: ChapaService) { }
 
   ngOnInit(): void {
+    this.dataLoaded = false;
     this.chapaService.all().subscribe(
       chapas => {
-        console.log("chapas",chapas);
         this.dataSource.data = chapas;
         this.totalChapas = chapas.length;
+        this.dataLoaded = true;
       }
     );
   }

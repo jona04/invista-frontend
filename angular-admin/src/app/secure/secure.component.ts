@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Emitters } from '../emitters/emitters';
+import { ShowMenuService } from '../services/show-menu.service';
 
 @Component({
   selector: 'app-secure',
@@ -12,12 +13,12 @@ export class SecureComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private showMenuService: ShowMenuService) { }
 
   ngOnInit(): void {
     this.authService.user().subscribe(
       user => {
-        console.log("user",user);
         if (user?.id){
           Emitters.authEmitter.emit(user);
         }else{
@@ -26,6 +27,10 @@ export class SecureComponent implements OnInit {
         }
       }
     );
+  }
+
+  public get showMenu(): boolean {
+    return this.showMenuService.showMenu;
   }
 
 }

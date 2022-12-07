@@ -20,15 +20,19 @@ export class NotaService {
   }
 
   all(): Observable<Nota[]> {
-    return this.http.get<Nota[]>(this.endpoint);
+    return this.http.get<Nota[]>(`${this.endpoint}`);
   }
 
-  allList(): Observable<Nota[]> {
-    return this.http.get<Nota[]>(`${this.endpoint}/list`);
+  allList(start: string, end: string): Observable<Nota[]> {
+    return this.http.get<Nota[]>(`${this.endpoint}/list?start=${start}&end=${end}`);
+  }
+
+  relatorio(start: string, end: string): Observable<any> {
+    return this.http.get<any>(`${this.endpoint}/relatorio?start=${start}&end=${end}`);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.get<void>(`${this.endpoint}/${id}`);
+    return this.http.delete<void>(`${this.endpoint}/${id}`);
   }
 
   create(data: Nota): Observable<Nota> {

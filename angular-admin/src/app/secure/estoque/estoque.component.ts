@@ -13,6 +13,7 @@ import { EstoqueService } from 'src/app/services/estoque.service';
 export class EstoqueComponent implements OnInit {
   displayedColumns: string[] = ['nome', 'estoque', 'entradas', 'saidas'];
 
+  dataLoaded: boolean;
   range: any;
   dataSource: any;
   sortedData: ChapaEstoque[];
@@ -24,6 +25,7 @@ export class EstoqueComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.dataLoaded = false;
     var curr = new Date; // get current date
     var last = curr.getDate() + curr.getDay(); // First day is the day of the month - the day of the week
     var first = last - 7; // last day is the first day + 6
@@ -38,6 +40,7 @@ export class EstoqueComponent implements OnInit {
         this.estoque = estoque;
         this.dataSource = new MatTableDataSource(this.estoque);
         this.dataSource.sort = this.sort;
+        this.dataLoaded = true;
       }
     );
   }
@@ -63,12 +66,13 @@ export class EstoqueComponent implements OnInit {
   }
 
   updateTable(): void {
-    console.log("range",this.range);
+    this.dataLoaded = false;
     this.estoqueService.all(this.range.value['start'].toISOString(), this.range.value['end'].toISOString()).subscribe(
       estoque => {
         this.estoque = estoque;
         this.dataSource = new MatTableDataSource(this.estoque);
         this.dataSource.sort = this.sort;
+        this.dataLoaded = true;
       }
     );
   }

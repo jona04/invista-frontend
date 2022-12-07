@@ -50,6 +50,10 @@ export class NotasFormComponent implements OnInit {
     });
     this.create = this.route.snapshot.data['create'];
 
+    var curr = new Date; // get current date
+    var last = new Date(curr.setDate(curr.getDate() + curr.getDay())).toISOString() // First day is the day of the month - the day of the week
+    var first = new Date(curr.setDate(curr.getDate() + curr.getDay() - 7)).toISOString(); // last day is the first day + 6
+    console.log("first",first);
     if (!this.create){
       this.id = this.route.snapshot.params['id'];
       this.notaService.getFull(this.id).subscribe(
@@ -64,7 +68,7 @@ export class NotasFormComponent implements OnInit {
           );
           this.form.controls['servico'].patchValue(servicos_aux);
 
-          this.servicoService.allList().subscribe(
+          this.servicoService.allList(first, last).subscribe(
             servicos => {
               this.allServicos = servicos.slice(0,100);
               this.filteredServicos = this.servicoCtrl.valueChanges.pipe(
@@ -76,7 +80,7 @@ export class NotasFormComponent implements OnInit {
         }
       );
     }else{
-      this.servicoService.allList().subscribe(
+      this.servicoService.allList(first, last).subscribe(
         servicos => {
           this.allServicos = servicos.slice(0,100);
           this.filteredServicos = this.servicoCtrl.valueChanges.pipe(

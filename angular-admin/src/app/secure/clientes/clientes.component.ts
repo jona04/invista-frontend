@@ -12,6 +12,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  dataLoaded: boolean;
   totalClientes: number;
   dataSource = new MatTableDataSource();
   columns = ['ID', 'Nome', 'Email', 'Telefone', 'CPF', 'Rua', 'Bairro', 'Numero', 'Cidade', 'Estado', 'Cep', 'Acoes'];
@@ -19,10 +20,12 @@ export class ClientesComponent implements OnInit, AfterViewInit {
   constructor(private clienteService: ClienteService) { }
 
   ngOnInit(): void {
+    this.dataLoaded = false;
     this.clienteService.all().subscribe(
       clientes => {
         this.dataSource.data = clientes;
         this.totalClientes = clientes.length;
+        this.dataLoaded = true;
       }
     );
   }

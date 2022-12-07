@@ -33,6 +33,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { SaidaFormComponent } from './estoque/saida/saida-form/saida-form.component';
 import { ChapasComponent } from './chapas/chapas.component';
+import { NotasRelatorioComponent } from './notas/notas-relatorio/notas-relatorio.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ChapasComponent } from './chapas/chapas.component';
     EntradaFormComponent,
     SaidaFormComponent,
     ChapasComponent,
+    NotasRelatorioComponent,
   ],
   imports: [
     CommonModule,
