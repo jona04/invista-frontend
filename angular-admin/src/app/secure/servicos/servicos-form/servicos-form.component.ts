@@ -19,6 +19,7 @@ export class ServicosFormComponent implements OnInit {
   create: boolean;
   chapaList: Chapa [];
   clienteList: Cliente [];
+  creating: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,10 +28,11 @@ export class ServicosFormComponent implements OnInit {
     private clienteService: ClienteService,
     private route: ActivatedRoute,
     private router: Router) {
-    
+
    }
 
   ngOnInit(): void {
+    this.creating = false;
     this.form = this.formBuilder.group({
       id: '',
       nome: '',
@@ -63,13 +65,19 @@ export class ServicosFormComponent implements OnInit {
   }
 
   submit(): void {
-    const method = this.create 
+    const method = this.create
       ? this.servicoService.create(this.form.getRawValue())
       : this.servicoService.update(this.id, this.form.getRawValue());
-      
-      method.subscribe(
-      servico => {
-        this.router.navigate(['servicos']);
+
+      method.subscribe({
+        next: (servico) => {
+          this.creating = false;
+          this.router.navigate(['servicos']);
+        },
+        error: (e) => {
+          console.log("error", e);
+          this.creating = false;
+        }
       }
     )
   }

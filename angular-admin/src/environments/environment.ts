@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: 'http://localhost:8002/api/admin',
-  // api: 'http://34.120.76.238/api/admin'
+  // api: 'https://admin-api.invistapublicidade.com/api/admin'
 };
 
 /*

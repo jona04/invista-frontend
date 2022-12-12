@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClienteService } from 'src/app/services/cliente.service';
+import { ChapaService } from 'src/app/services/chapa.service';
 
 @Component({
-  selector: 'app-clientes-form',
-  templateUrl: './clientes-form.component.html',
-  styleUrls: ['./clientes-form.component.css']
+  selector: 'app-chapas-form',
+  templateUrl: './chapas-form.component.html',
+  styleUrls: ['./chapas-form.component.css']
 })
-export class ClientesFormComponent implements OnInit {
+export class ChapasFormComponent implements OnInit {
 
   create: boolean;
   form: FormGroup;
@@ -17,46 +17,44 @@ export class ClientesFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private clienteService: ClienteService,
+    private chapaService: ChapaService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.creating = false;
     this.form = this.formBuilder.group({
       nome: '',
-      email: '',
-      telefone: '',
-      cpf: '',
-      rua: '',
-      bairro: '',
-      numero: null,
-      cidade: '',
-      estado: '',
-      cep: ''
-    })
+      valor: '',
+      estoque: '',
+      marca: '',
+      obs: ''
+    });
 
     this.create = this.route.snapshot.data['create'];
     if (!this.create){
       this.id = this.route.snapshot.params['id'];
-      this.clienteService.get(this.id).subscribe(
-        cliente => {
-          this.form.patchValue(cliente);
-        }
-      )
+      if (this.id) {
+        this.chapaService.get(this.id).subscribe(
+          chapa => {
+            this.form.patchValue(chapa);
+          }
+        );
+      }
     };
   }
 
   submit(): void {
     this.creating = true;
     const method = this.create
-      ? this.clienteService.create(this.form.getRawValue())
-      : this.clienteService.update(this.id, this.form.getRawValue());
+      ? this.chapaService.create(this.form.getRawValue())
+      : this.chapaService.update(this.id, this.form.getRawValue());
 
       method.subscribe({
-        next: (cliente) => {
+        next: (chapa) => {
           this.creating = false;
-          this.router.navigate(['clientes']);
+          this.router.navigate(['chapas']);
         },
         error: (e) => {
           console.log("error", e);

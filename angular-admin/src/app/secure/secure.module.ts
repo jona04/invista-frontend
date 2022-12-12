@@ -34,6 +34,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { SaidaFormComponent } from './estoque/saida/saida-form/saida-form.component';
 import { ChapasComponent } from './chapas/chapas.component';
 import { NotasRelatorioComponent } from './notas/notas-relatorio/notas-relatorio.component';
+import { ChapasFormComponent } from './chapas/chapas-form/chapas-form.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { NotasRelatorioComponent } from './notas/notas-relatorio/notas-relatorio
     SaidaFormComponent,
     ChapasComponent,
     NotasRelatorioComponent,
+    ChapasFormComponent,
   ],
   imports: [
     CommonModule,

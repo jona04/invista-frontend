@@ -1,0 +1,43 @@
+<form [formGroup]="form" class="" (submit)="submit()">
+  <h1>Chapa</h1>
+
+  <div class="mb-3">
+      <mat-form-field appearance="standard" class="col-6">
+          <mat-label>Nome*</mat-label>
+          <input formControlName="nome" matInput placeholder="Nome">
+      </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field appearance="standard" class="col-6">
+        <mat-label>Valor*</mat-label>
+        <input formControlName="valor" matInput placeholder="Valor">
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field appearance="standard" class="col-6">
+        <mat-label>Estoque*</mat-label>
+        <input formControlName="estoque" matInput placeholder="Estoque">
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field appearance="standard" class="col-6">
+        <mat-label>Marca</mat-label>
+        <input formControlName="marca" matInput placeholder="Marca">
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field appearance="standard" class="col-6">
+        <mat-label>Observações</mat-label>
+        <input formControlName="obs" matInput placeholder="Observações">
+    </mat-form-field>
+  </div>
+
+  <button [disabled]="creating" class="btn btn-primary mt-3" type="submit">
+    <span *ngIf="creating" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Salvar
+  </button>
+</form>

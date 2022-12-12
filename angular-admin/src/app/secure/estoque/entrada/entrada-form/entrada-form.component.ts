@@ -16,6 +16,7 @@ export class EntradaFormComponent implements OnInit {
   id: number;
   chapaList: Chapa [];
   categoriaList: any [];
+  creating: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +28,7 @@ export class EntradaFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.creating = false;
     this.form = this.formBuilder.group({
       id: '',
       chapa: '',
@@ -59,10 +61,16 @@ export class EntradaFormComponent implements OnInit {
   }
 
   submit(): void {
-    this.entradaChapaService.create(this.form.getRawValue()).subscribe(
-      (entrada) => {
+    this.creating = true;
+    this.entradaChapaService.create(this.form.getRawValue()).subscribe({
+      next: (entrada) => {
+        this.creating = false;
         this.router.navigate(['estoque/entrada']);
+      },
+      error: (e) => {
+        console.log("error", e);
+        this.creating = false;
       }
-    );
+    });
   }
 }

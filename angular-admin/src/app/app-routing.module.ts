@@ -20,16 +20,19 @@ import { SaidaComponent } from './secure/estoque/saida/saida.component';
 import { EntradaFormComponent } from './secure/estoque/entrada/entrada-form/entrada-form.component';
 import { SaidaFormComponent } from './secure/estoque/saida/saida-form/saida-form.component';
 import { NotasRelatorioComponent } from './secure/notas/notas-relatorio/notas-relatorio.component';
+import { ChapasFormComponent } from './secure/chapas/chapas-form/chapas-form.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SecureComponent,
     children: [
-      {path: '', pathMatch:'full', redirectTo: 'clientes'},
+      {path: '', pathMatch:'full', redirectTo: 'chapas'},
       {path: 'profile', component: ProfileComponent},
       {path: 'users', component: UserComponent},
       {path: 'chapas', component: ChapasComponent},
+      {path: 'chapas/criar', component: ChapasFormComponent, data: {create: true}},
+      {path: 'chapas/:id/edit', component: ChapasFormComponent, data: {create: false}},
       {path: 'clientes', component: ClientesComponent},
       {path: 'clientes/criar', component: ClientesFormComponent, data: {create: true}},
       {path: 'clientes/:id/edit', component: ClientesFormComponent, data: {create: false}},

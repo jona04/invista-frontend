@@ -18,6 +18,10 @@ export class ServicoService {
     return this.http.get<Servico[]>(this.endpoint);
   }
 
+  allCreateNota(): Observable<Servico[]> {
+    return this.http.get<Servico[]>(`${this.endpoint}/nota/list`);
+  }
+
   allList(start: string, end: string): Observable<Servico[]> {
     return this.http.get<Servico[]>(`${this.endpoint}/list?start=${start}&end=${end}`);
   }

@@ -1,32 +1,38 @@
 <form [formGroup]="form" class="" (submit)="submit()">
     <h1>Nota</h1>
 
-    <mat-form-field class="example-chip-list col-6" appearance="fill">
-      <mat-label>Servicos</mat-label>
-      <mat-chip-list #chipList aria-label="Selecionar servico">
-        <mat-chip
-          *ngFor="let servico of servicos"
-          (removed)="remove(servico)">
-          {{servico.nome}}
-          <button matChipRemove>
-            <mat-icon>cancel</mat-icon>
-          </button>
-        </mat-chip>
-        <input
-          placeholder="Novo servico..."
-          #servicoInput
-          [formControl]="servicoCtrl"
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="add($event)">
-      </mat-chip-list>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let servico of filteredServicos | async" [value]="servico">
-          {{servico.nome}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+    <div class="mb-3 row">
+      <mat-form-field class="example-chip-list col-6" appearance="fill">
+        <mat-label>Servicos*</mat-label>
+        <mat-chip-list #chipList aria-label="Selecionar servico">
+          <mat-chip
+            *ngFor="let servico of servicos"
+            (removed)="remove(servico)">
+            {{servico.nome}} - {{servico.chapa.nome}} - {{servico.quantidade}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="Novo servico..."
+            #servicoInput
+            [formControl]="servicoCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let servico of filteredServicos | async" [value]="servico">
+            {{servico.nome}} - {{servico.chapa}} - {{servico.quantidade}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="col-6">
+        <button mat-stroked-button color="primary" class="mr-1" (click)="redirectToCreateServico()">Cadastrar Serviço</button>
+        <button mat-stroked-button color="primary" (click)="updateServicoList()">Atualizar Lista</button>
+      </div>
+    </div>
 
     <div class="mb-3">
         <mat-form-field appearance="standard" class="col-6">
@@ -42,6 +48,8 @@
         </mat-form-field>
     </div>
 
-
-    <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+    <button [disabled]="creating" class="btn btn-primary mt-3" type="submit">
+      <span *ngIf="creating" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Salvar
+    </button>
   </form>

@@ -16,6 +16,7 @@ export class SaidaFormComponent implements OnInit {
   id: number;
   chapaList: Chapa [];
   categoriaList: any [];
+  creating: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +28,7 @@ export class SaidaFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.creating = false;
     this.form = this.formBuilder.group({
       id: '',
       chapa: '',
@@ -57,10 +59,16 @@ export class SaidaFormComponent implements OnInit {
   }
 
   submit(): void {
-    this.saidaChapaService.create(this.form.getRawValue()).subscribe(
-      (saida) => {
+    this.creating = true;
+    this.saidaChapaService.create(this.form.getRawValue()).subscribe({
+      next: (saida) => {
+        this.creating = false;
         this.router.navigate(['estoque/saida']);
+      },
+      error: (e) => {
+        console.log("error", e);
+        this.creating = false;
       }
-    );
+    });
   }
 }

@@ -3,21 +3,21 @@
 
     <div class="mb-3">
         <mat-form-field appearance="standard" class="col-6">
-            <mat-label>Nome</mat-label>
+            <mat-label>Nome*</mat-label>
             <input formControlName="nome" matInput placeholder="Nome">
         </mat-form-field>
     </div>
 
     <div class="mb-3">
         <mat-form-field appearance="standard" class="col-6">
-            <mat-label>Quantidade</mat-label>
+            <mat-label>Quantidade*</mat-label>
             <input formControlName="quantidade" matInput placeholder="Quantidade">
         </mat-form-field>
     </div>
 
     <div class="mb-3">
         <mat-form-field appearance="fill" class="col-6">
-            <mat-label>Cliente</mat-label>
+            <mat-label>Cliente*</mat-label>
             <mat-select formControlName="cliente">
                 <mat-option *ngFor="let cliente of clienteList" [value]="cliente.id">
                 {{cliente.nome}}
@@ -28,7 +28,7 @@
 
     <div class="mb-3">
         <mat-form-field appearance="fill" class="col-6">
-            <mat-label>Chapa</mat-label>
+            <mat-label>Chapa*</mat-label>
             <mat-select formControlName="chapa">
                 <mat-option *ngFor="let chapa of chapaList" [value]="chapa.id">
                 {{chapa.nome}}
@@ -37,5 +37,8 @@
         </mat-form-field>
     </div>
 
-    <button class="btn btn-primary mt-3" type="submit">Salvar</button>
+    <button [disabled]="creating" class="btn btn-primary mt-3" type="submit">
+      <span *ngIf="creating" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Salvar
+    </button>
   </form>

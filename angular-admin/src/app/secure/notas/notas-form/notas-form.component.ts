@@ -20,7 +20,7 @@ export class NotasFormComponent implements OnInit {
   form: FormGroup;
   id: number;
   create: boolean;
-
+  creating: boolean;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   servicoCtrl = new FormControl();
   filteredServicos: Observable<Servico[]>;
@@ -42,6 +42,7 @@ export class NotasFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.creating = false;
     this.form = this.formBuilder.group({
       id: '',
       servico: '',
@@ -51,9 +52,10 @@ export class NotasFormComponent implements OnInit {
     this.create = this.route.snapshot.data['create'];
 
     var curr = new Date; // get current date
-    var last = new Date(curr.setDate(curr.getDate() + curr.getDay())).toISOString() // First day is the day of the month - the day of the week
-    var first = new Date(curr.setDate(curr.getDate() + curr.getDay() - 7)).toISOString(); // last day is the first day + 6
-    console.log("first",first);
+    var last = curr.getMonth(); //current month
+    var first = last - 1;
+    var firstDay = new Date(curr.setMonth(first)).toISOString() // First day is the day of the month - the day of the week
+    var lastDay = new Date(curr.setMonth(last)).toISOString(); // last day is the first day + 6
     if (!this.create){
       this.id = this.route.snapshot.params['id'];
       this.notaService.getFull(this.id).subscribe(
@@ -68,45 +70,16 @@ export class NotasFormComponent implements OnInit {
           );
           this.form.controls['servico'].patchValue(servicos_aux);
 
-          this.servicoService.allList(first, last).subscribe(
-            servicos => {
-              this.allServicos = servicos.slice(0,100);
-              this.filteredServicos = this.servicoCtrl.valueChanges.pipe(
-                startWith(null),
-                map((fruit: Servico | null) => (fruit ? this._filter(fruit) : this.allServicos.slice())),
-              );
-            }
-          );
+          this.getServicos();
         }
       );
     }else{
-      this.servicoService.allList(first, last).subscribe(
-        servicos => {
-          this.allServicos = servicos.slice(0,100);
-          this.filteredServicos = this.servicoCtrl.valueChanges.pipe(
-            startWith(null),
-            map((fruit: Servico | null) => (fruit ? this._filter(fruit) : this.allServicos.slice())),
-          );
-        }
-      );
+      this.getServicos();
     }
   }
 
   add(event: MatChipInputEvent): void {
     console.log("event", event);
-    // const input = event.input;
-    // const value = event.value;
-
-    // const value: Servico =  event;
-    // // Add our fruit
-    // if (value) {
-    //   this.fruits.push(value);
-    // }
-
-    // // Clear the input value
-    // event.chipInput!.clear();
-
-    // this.fruitCtrl.setValue(null);
   }
 
   remove(fruit: Servico): void {
@@ -129,7 +102,7 @@ export class NotasFormComponent implements OnInit {
   }
 
   submit(): void {
-    console.log(this.form.getRawValue(),this.servicos,this.servicoCtrl);
+    this.creating = true;
     const servicoIds: number[] = [];
     this.servicos.forEach(
       servico => {
@@ -137,16 +110,44 @@ export class NotasFormComponent implements OnInit {
       }
     )
     this.form.controls['servico'].patchValue(servicoIds);
-    console.log(this.form.getRawValue());
-    console.log("this.create",this.create);
     const method = this.create
       ? this.notaService.create(this.form.getRawValue())
       : this.notaService.update(this.id, this.form.getRawValue());
 
-      method.subscribe(
-      nota => {
-        this.router.navigate(['notas']);
+      method.subscribe({
+        next: (nota) => {
+          this.creating = false;
+          this.router.navigate(['notas']);
+        },
+        error: (e) => {
+          console.log("error", e);
+          this.creating = false;
+        }
+      });
+  }
+
+  redirectToCreateServico(): void {
+    window.open('/servicos/criar', '_blank');
+  }
+
+  updateServicoList(): void {
+    var curr = new Date; // get current date
+    var last = curr.getMonth(); //current month
+    var first = last - 1;
+    var firstDay = new Date(curr.setMonth(first)).toISOString() // First day is the day of the month - the day of the week
+    var lastDay = new Date(curr.setMonth(last)).toISOString(); // last day is the first day + 6
+    this.getServicos();
+  }
+
+  getServicos(): void {
+    this.servicoService.allCreateNota().subscribe(
+      servicos => {
+        this.allServicos = servicos;
+        this.filteredServicos = this.servicoCtrl.valueChanges.pipe(
+          startWith(null),
+          map((serv: Servico | null) => (serv ? this._filter(serv) : this.allServicos.slice())),
+        );
       }
-    )
+    );
   }
 }

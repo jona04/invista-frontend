@@ -11,7 +11,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavComponent implements OnInit {
   user: User;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+    this.user = {
+      id: 0,
+      first_name: '',
+      last_name: '',
+      email: '',
+      is_financeiro: false
+    }
+  }
 
   ngOnInit(): void {
     Emitters.authEmitter.subscribe(

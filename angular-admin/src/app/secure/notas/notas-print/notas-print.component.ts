@@ -29,7 +29,6 @@ export class NotasPrintComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.notaService.getFull(this.id).subscribe(
       nota => {
-        console.log("nota", nota);
         this.nota = nota;
         this.clienteService.get(this.nota.servico[0].cliente.id).subscribe(
           cliente => {
