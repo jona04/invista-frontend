@@ -24,7 +24,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by chapa">
       Chapa
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.chapa}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.chapa.nome}} </td>
   </ng-container>
 
   <!-- Categoria Column -->
@@ -32,15 +32,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by categoria">
       Categoria
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
-  </ng-container>
-
-  <!-- Observacao Column -->
-  <ng-container matColumnDef="observacao">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by observacao">
-      Observacao
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.observacao}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.categoria.descricao}} </td>
   </ng-container>
 
   <!-- Data Column -->
@@ -49,6 +41,14 @@
       Data
     </th>
     <td mat-cell *matCellDef="let element"> {{element.data| date: 'dd/MM/yyyy'}} </td>
+  </ng-container>
+
+  <!-- Observacao Column -->
+  <ng-container matColumnDef="observacao">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by observacao">
+      Observacao
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.observacao}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

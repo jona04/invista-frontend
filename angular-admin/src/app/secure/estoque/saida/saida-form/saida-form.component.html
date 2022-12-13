@@ -19,7 +19,7 @@
       </mat-form-field>
   </div>
 
-  <div class="mb-3">
+  <div class="mb-3 row">
     <mat-form-field appearance="fill" class="col-6">
         <mat-label>Categoria*</mat-label>
         <mat-select formControlName="categoria">
@@ -28,6 +28,10 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
+    <div class="col-6">
+      <button type="button" mat-stroked-button color="primary" class="mr-1" (click)="redirectToCreateCategoria()">Cadastrar Categoria</button>
+      <button type="button" mat-stroked-button color="primary" (click)="getCategoriaSaida()">Atualizar Lista</button>
+    </div>
   </div>
 
   <div class="mb-3">

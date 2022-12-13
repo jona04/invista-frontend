@@ -17,4 +17,8 @@ export class CategoriaEntradaService {
   all(): Observable<CategoriaEstoque[]> {
     return this.http.get<CategoriaEstoque[]>(this.endpoint);
   }
+
+  create(data: CategoriaEstoque): Observable<CategoriaEstoque> {
+    return this.http.post<CategoriaEstoque>(this.endpoint, data);
+  }
 }

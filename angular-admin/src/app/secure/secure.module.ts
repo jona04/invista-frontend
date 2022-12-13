@@ -35,6 +35,8 @@ import { SaidaFormComponent } from './estoque/saida/saida-form/saida-form.compon
 import { ChapasComponent } from './chapas/chapas.component';
 import { NotasRelatorioComponent } from './notas/notas-relatorio/notas-relatorio.component';
 import { ChapasFormComponent } from './chapas/chapas-form/chapas-form.component';
+import { EntradaCategoriaFormComponent } from './estoque/entrada/entrada-categoria-form/entrada-categoria-form.component';
+import { SaidaCategoriaFormComponent } from './estoque/saida/saida-categoria-form/saida-categoria-form.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { ChapasFormComponent } from './chapas/chapas-form/chapas-form.component'
     ChapasComponent,
     NotasRelatorioComponent,
     ChapasFormComponent,
+    EntradaCategoriaFormComponent,
+    SaidaCategoriaFormComponent,
   ],
   imports: [
     CommonModule,

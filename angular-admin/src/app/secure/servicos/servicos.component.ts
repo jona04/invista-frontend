@@ -58,11 +58,14 @@ export class ServicosComponent implements OnInit, AfterViewInit {
 
   delete(id: number){
     if (confirm("Você tem certeza que deseja deletar?")){
-      this.servicoService.delete(id).subscribe(
-        () => {
+      this.servicoService.delete(id).subscribe({
+        next: () => {
           this.dataSource.data = this.dataSource.data.filter((servico: any) => servico.id !== id);
+        },
+        error: (e) => {
+          confirm("Houve um erro ao deletar arquivo: " + e.message);
         }
-      )
+      });
     }
   }
 }

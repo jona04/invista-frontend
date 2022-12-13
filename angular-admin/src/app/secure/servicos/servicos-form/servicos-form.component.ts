@@ -65,6 +65,7 @@ export class ServicosFormComponent implements OnInit {
   }
 
   submit(): void {
+    this.creating = true;
     const method = this.create
       ? this.servicoService.create(this.form.getRawValue())
       : this.servicoService.update(this.id, this.form.getRawValue());

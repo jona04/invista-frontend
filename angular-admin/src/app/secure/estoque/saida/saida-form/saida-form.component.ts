@@ -20,11 +20,10 @@ export class SaidaFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private saidaChapaService: SaidaChapaService,
     private chapaService: ChapaService,
-    private categoriaEntradaService: CategoriaSaidaService
+    private categoriaSaidaService: CategoriaSaidaService
   ) { }
 
   ngOnInit(): void {
@@ -38,24 +37,13 @@ export class SaidaFormComponent implements OnInit {
       observacao: ''
     });
 
-    this.id = this.route.snapshot.params['id'];
-    this.saidaChapaService.get(this.id).subscribe(
-      saida => {
-        this.form.patchValue(saida);
-      }
-    );
-
     this.chapaService.all().subscribe(
       chapas => {
         this.chapaList = chapas;
       }
     );
 
-    this.categoriaEntradaService.all().subscribe(
-      categoriaEntradas => {
-        this.categoriaList = categoriaEntradas;
-      }
-    );
+    this.getCategoriaSaida();
   }
 
   submit(): void {
@@ -70,5 +58,18 @@ export class SaidaFormComponent implements OnInit {
         this.creating = false;
       }
     });
+  }
+
+  redirectToCreateCategoria(): void {
+    window.open('estoque/saida/categoria/criar', '_blank');
+  }
+
+  getCategoriaSaida(): void {
+    this.categoriaList = [];
+    this.categoriaSaidaService.all().subscribe(
+      categoriaSaida => {
+        this.categoriaList = categoriaSaida;
+      }
+    );
   }
 }

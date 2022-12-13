@@ -19,6 +19,10 @@ export class EntradaChapaService {
     return this.http.get<EntradaChapa[]>(this.endpoint);
   }
 
+  allList(): Observable<EntradaChapa[]> {
+    return this.http.get<EntradaChapa[]>(`${this.endpoint}/list`);
+  }
+
   get(id: number): Observable<EntradaChapa> {
     return this.http.get<EntradaChapa>(`${this.endpoint}/${id}`);
   }

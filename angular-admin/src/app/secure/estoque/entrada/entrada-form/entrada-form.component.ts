@@ -20,7 +20,6 @@ export class EntradaFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private entradaChapaService: EntradaChapaService,
     private chapaService: ChapaService,
@@ -40,24 +39,13 @@ export class EntradaFormComponent implements OnInit {
       observacao: ''
     });
 
-    this.id = this.route.snapshot.params['id'];
-    this.entradaChapaService.get(this.id).subscribe(
-      entrada => {
-        this.form.patchValue(entrada);
-      }
-    );
-
     this.chapaService.all().subscribe(
       chapas => {
         this.chapaList = chapas;
       }
     );
 
-    this.categoriaEntradaService.all().subscribe(
-      categoriaEntradas => {
-        this.categoriaList = categoriaEntradas;
-      }
-    );
+    this.getCategoriaEntrada();
   }
 
   submit(): void {
@@ -72,5 +60,18 @@ export class EntradaFormComponent implements OnInit {
         this.creating = false;
       }
     });
+  }
+
+  redirectToCreateCategoria(): void {
+    window.open('estoque/entrada/categoria/criar', '_blank');
+  }
+
+  getCategoriaEntrada(): void {
+    this.categoriaList = [];
+    this.categoriaEntradaService.all().subscribe(
+      categoriaEntradas => {
+        this.categoriaList = categoriaEntradas;
+      }
+    );
   }
 }

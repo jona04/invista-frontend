@@ -1,3 +1,4 @@
+import { SaidaCategoriaFormComponent } from './secure/estoque/saida/saida-categoria-form/saida-categoria-form.component';
 import { ChapasComponent } from './secure/chapas/chapas.component';
 import { LoginComponent } from './public/login/login.component';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,7 @@ import { EntradaFormComponent } from './secure/estoque/entrada/entrada-form/entr
 import { SaidaFormComponent } from './secure/estoque/saida/saida-form/saida-form.component';
 import { NotasRelatorioComponent } from './secure/notas/notas-relatorio/notas-relatorio.component';
 import { ChapasFormComponent } from './secure/chapas/chapas-form/chapas-form.component';
+import { EntradaCategoriaFormComponent } from './secure/estoque/entrada/entrada-categoria-form/entrada-categoria-form.component';
 
 const routes: Routes = [
   {
@@ -45,8 +47,10 @@ const routes: Routes = [
       {path: 'estoque', component: EstoqueComponent},
       {path: 'estoque/entrada', component: EntradaComponent},
       {path: 'estoque/entrada/criar', component: EntradaFormComponent},
+      {path: 'estoque/entrada/categoria/criar', component: EntradaCategoriaFormComponent},
       {path: 'estoque/saida', component: SaidaComponent},
       {path: 'estoque/saida/criar', component: SaidaFormComponent},
+      {path: 'estoque/saida/categoria/criar', component: SaidaCategoriaFormComponent},
     ]
   },
   {path: 'notas/:id/print', component: NotasPrintComponent},

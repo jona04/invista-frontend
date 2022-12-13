@@ -19,6 +19,10 @@ export class SaidaChapaService {
     return this.http.get<SaidaChapa[]>(this.endpoint);
   }
 
+  allList(): Observable<SaidaChapa[]> {
+    return this.http.get<SaidaChapa[]>(`${this.endpoint}/list`);
+  }
+
   get(id: number): Observable<SaidaChapa> {
     return this.http.get<SaidaChapa>(`${this.endpoint}/${id}`);
   }

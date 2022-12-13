@@ -22,7 +22,7 @@ export class SaidaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.saidaChapaService.all().subscribe(
+    this.saidaChapaService.allList().subscribe(
       saidas => {
         this.saidas = saidas;
         this.dataSource = new MatTableDataSource(this.saidas);

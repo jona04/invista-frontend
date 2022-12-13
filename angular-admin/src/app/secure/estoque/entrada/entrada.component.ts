@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./entrada.component.css']
 })
 export class EntradaComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'quantidade', 'marca', 'valorUnitario', 'chapa', 'categoria', 'data'];
+  displayedColumns: string[] = ['id', 'chapa', 'categoria', 'data', 'quantidade', 'marca', 'valorUnitario'];
 
   dataSource: any;
   sortedData: EntradaChapa[];
@@ -22,7 +22,7 @@ export class EntradaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.chapaEntradaService.all().subscribe(
+    this.chapaEntradaService.allList().subscribe(
       entradas => {
         this.entradas = entradas;
         this.dataSource = new MatTableDataSource(this.entradas);
