@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // api: 'http://localhost:8003/api/financeiro'
-  api: 'http://34.120.76.238/api/financeiro'
+  api: 'http://localhost:8003/api/financeiro'
+  // api: 'http://34.120.76.238/api/financeiro'
 };
 
 /*

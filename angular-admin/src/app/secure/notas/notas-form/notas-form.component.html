@@ -24,13 +24,13 @@
         </mat-chip-list>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
           <mat-option *ngFor="let servico of filteredServicos | async" [value]="servico">
-            {{servico.nome}} - {{servico.chapa}} - {{servico.quantidade}}
+            {{servico.nome}} - {{servico.chapa.nome}} - {{servico.quantidade}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
       <div class="col-6">
         <button type="button" mat-stroked-button color="primary" class="mr-1" (click)="redirectToCreateServico()">Cadastrar Serviço</button>
-        <button type="button" mat-stroked-button color="primary" (click)="updateServicoList()">Atualizar Lista</button>
+        <button type="button" mat-stroked-button color="primary" (click)="getServicos()">Atualizar Lista</button>
       </div>
     </div>
 

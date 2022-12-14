@@ -50,12 +50,6 @@ export class NotasFormComponent implements OnInit {
       obs: ''
     });
     this.create = this.route.snapshot.data['create'];
-
-    var curr = new Date; // get current date
-    var last = curr.getMonth(); //current month
-    var first = last - 1;
-    var firstDay = new Date(curr.setMonth(first)).toISOString() // First day is the day of the month - the day of the week
-    var lastDay = new Date(curr.setMonth(last)).toISOString(); // last day is the first day + 6
     if (!this.create){
       this.id = this.route.snapshot.params['id'];
       this.notaService.getFull(this.id).subscribe(
@@ -122,21 +116,13 @@ export class NotasFormComponent implements OnInit {
         error: (e) => {
           console.log("error", e);
           this.creating = false;
+          confirm("Error: "+ e?.error?.detail);
         }
       });
   }
 
   redirectToCreateServico(): void {
     window.open('/servicos/criar', '_blank');
-  }
-
-  updateServicoList(): void {
-    var curr = new Date; // get current date
-    var last = curr.getMonth(); //current month
-    var first = last - 1;
-    var firstDay = new Date(curr.setMonth(first)).toISOString() // First day is the day of the month - the day of the week
-    var lastDay = new Date(curr.setMonth(last)).toISOString(); // last day is the first day + 6
-    this.getServicos();
   }
 
   getServicos(): void {
