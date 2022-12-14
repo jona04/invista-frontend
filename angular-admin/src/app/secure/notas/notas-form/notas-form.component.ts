@@ -1,7 +1,8 @@
+import { Chapa } from 'src/app/interfaces/chapa';
 import { Servico } from './../../../interfaces/servico';
 import { ServicoService } from './../../../services/servico.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -9,6 +10,10 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import { NotaService } from 'src/app/services/nota.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Cliente } from 'src/app/interfaces/cliente';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { ChapaService } from 'src/app/services/chapa.service';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-notas-form',
@@ -26,7 +31,7 @@ export class NotasFormComponent implements OnInit {
   filteredServicos: Observable<Servico[]>;
   servicos: Servico[] = [];
   allServicos: Servico[] = [];
-
+  servicoDialog: Servico;
   servicoList: Servico[] = [];
 
   @ViewChild('servicoInput') servicoInput: ElementRef<HTMLInputElement>;
@@ -36,10 +41,9 @@ export class NotasFormComponent implements OnInit {
     private notaService: NotaService,
     private servicoService: ServicoService,
     private router: Router,
-    private route: ActivatedRoute
-  ){
-
-  }
+    private route: ActivatedRoute,
+    public dialog: MatDialog
+  ){}
 
   ngOnInit(): void {
     this.creating = false;
@@ -135,5 +139,85 @@ export class NotasFormComponent implements OnInit {
         );
       }
     );
+  }
+
+  openDialogCreateServico(): void {
+    const dialogRef = this.dialog.open(CreateServicoDialogComponent, {
+        height: '600px',
+        width: '600px',
+        data: this.servicoDialog,
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getServicos();
+      this.servicos.push(result);
+      this.servicoDialog = result;
+    });
+  }
+}
+
+@Component({
+  selector: 'app-create-servico-dialog',
+  templateUrl: './create-servico-dialog.component.html'
+})
+export class CreateServicoDialogComponent implements OnInit {
+  form: FormGroup;
+  chapaList: Chapa [];
+  clienteList: Cliente [];
+  creating: boolean;
+
+  constructor(
+    public dialogRef: MatDialogRef<CreateServicoDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Servico,
+    private formBuilder: FormBuilder,
+    private servicoService: ServicoService,
+    private chapaService: ChapaService,
+    private clienteService: ClienteService
+  ) { }
+
+  ngOnInit(): void {
+    this.creating = false;
+    this.form = this.formBuilder.group({
+      id: '',
+      nome: '',
+      quantidade: '',
+      cliente: '',
+      chapa: ''
+    });
+
+    this.chapaService.all().subscribe(
+      chapas => {
+        this.chapaList = chapas;
+      }
+    )
+
+    this.clienteService.all().subscribe(
+      clientes => {
+        this.clienteList = clientes;
+      }
+    )
+  }
+
+  submitServico(): void {
+    this.creating = true;
+    const method = this.servicoService.create(this.form.getRawValue())
+      method.subscribe({
+        next: (servico) => {
+          const chapaId: any = servico.chapa;
+          this.chapaService.get(chapaId).subscribe( chapa => {
+            this.creating = false;
+            servico.chapa = chapa;
+            this.dialogRef.close(servico);
+          });
+        },
+        error: (e) => {
+          this.creating = false;
+        }
+      }
+    )
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

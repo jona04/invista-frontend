@@ -37,6 +37,8 @@ import { NotasRelatorioComponent } from './notas/notas-relatorio/notas-relatorio
 import { ChapasFormComponent } from './chapas/chapas-form/chapas-form.component';
 import { EntradaCategoriaFormComponent } from './estoque/entrada/entrada-categoria-form/entrada-categoria-form.component';
 import { SaidaCategoriaFormComponent } from './estoque/saida/saida-categoria-form/saida-categoria-form.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CreateServicoDialogComponent } from './notas/notas-form/notas-form.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { SaidaCategoriaFormComponent } from './estoque/saida/saida-categoria-for
     ChapasFormComponent,
     EntradaCategoriaFormComponent,
     SaidaCategoriaFormComponent,
+    CreateServicoDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -80,7 +83,8 @@ import { SaidaCategoriaFormComponent } from './estoque/saida/saida-categoria-for
     MatSortModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
   ]
 })
 export class SecureModule { }
