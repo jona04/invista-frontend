@@ -149,9 +149,10 @@ export class NotasFormComponent implements OnInit {
       });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getServicos();
-      this.servicos.push(result);
-      this.servicoDialog = result;
+      if (result) {
+        this.getServicos();
+        this.servicos.push(result);
+      }
     });
   }
 }
