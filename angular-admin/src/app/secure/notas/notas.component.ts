@@ -17,7 +17,7 @@ export class NotasComponent implements OnInit {
   range: any;
   totalNotas: number;
   dataSource = new MatTableDataSource();
-  columns = ['Numero', 'Valor Total Nota', 'Criado em', 'Obs', 'Desconto', 'Acoes'];
+  columns = ['Numero', 'Cliente', 'Valor Total Nota', 'Criado em', 'Obs', 'Desconto', 'Acoes'];
 
   constructor(private notaService: NotaService) { }
 

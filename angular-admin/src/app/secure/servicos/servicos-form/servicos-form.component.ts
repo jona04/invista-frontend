@@ -78,6 +78,7 @@ export class ServicosFormComponent implements OnInit {
         error: (e) => {
           console.log("error", e);
           this.creating = false;
+          confirm("Error: "+ e?.error?.detail);
         }
       }
     )

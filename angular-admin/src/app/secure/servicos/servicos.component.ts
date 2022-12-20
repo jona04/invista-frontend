@@ -63,7 +63,7 @@ export class ServicosComponent implements OnInit, AfterViewInit {
           this.dataSource.data = this.dataSource.data.filter((servico: any) => servico.id !== id);
         },
         error: (e) => {
-          confirm("Houve um erro ao deletar arquivo: " + e.message);
+          confirm("Error: " + e?.error?.detail);
         }
       });
     }
