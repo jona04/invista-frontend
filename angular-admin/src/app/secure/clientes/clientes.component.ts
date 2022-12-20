@@ -2,6 +2,7 @@ import { ClienteService } from './../../services/cliente.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Cliente } from 'src/app/interfaces/cliente';
 
 @Component({
   selector: 'app-clientes',
@@ -12,6 +13,8 @@ export class ClientesComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  filterValue: string;
+  allClientes: Cliente [] = [];
   dataLoaded: boolean;
   totalClientes: number;
   dataSource = new MatTableDataSource();
@@ -23,6 +26,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     this.dataLoaded = false;
     this.clienteService.all().subscribe(
       clientes => {
+        this.allClientes = clientes;
         this.dataSource.data = clientes;
         this.totalClientes = clientes.length;
         this.dataLoaded = true;
@@ -38,9 +42,23 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     if (confirm("Você tem certeza que deseja deletar?")){
       this.clienteService.delete(id).subscribe(
         () => {
-          this.dataSource.data = this.dataSource.data.filter((cliente: any) => cliente.id !== id);
+          this.allClientes = this.allClientes.filter((cliente: any) => cliente.id !== id);
+          this.dataSource.data = this.allClientes;
         }
       )
     }
+  }
+
+  onKeyFilter(event?: any): void {
+    this.dataSource.data = this.allClientes.filter((servico: any) => 
+      servico.nome.toLowerCase().includes(this.filterValue.toLowerCase())
+    );
+    this.totalClientes = this.dataSource.data.length;
+  }
+
+  cleanFilterValue(): void {
+    this.filterValue = '';
+    this.dataSource.data = this.allClientes;
+    this.totalClientes = this.dataSource.data.length;
   }
 }

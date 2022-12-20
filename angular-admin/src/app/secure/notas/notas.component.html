@@ -4,7 +4,7 @@
 </div>
 
 <div class="row">
-  <div class="col-6">
+  <div class="col-3">
     <mat-form-field appearance="fill" class="col-12 mt-2">
       <mat-label>Escolha a data</mat-label>
       <mat-date-range-input class="col-10 float-left" [formGroup]="range" [rangePicker]="picker">
@@ -33,6 +33,14 @@
       class="mt-1 ml-3"
       [routerLink]="['relatorio', range.value['start'], range.value['end']]" >Gerar relatório</button>
   </div>
+</div>
+
+<div class="mt-5">
+  <mat-form-field appearance="outline">
+      <mat-label>Filtrar por Numero ou Cliente</mat-label>
+      <input [(ngModel)]="filterValue" (keyup)="onKeyFilter($event)" matInput placeholder="Obs">
+  </mat-form-field>
+  <button class="ml-2" mat-stroked-button (click)="cleanFilterValue()">Limpar</button>
 </div>
 
 <div *ngIf="!dataLoaded; else showData" class="spinner-border" role="status">
@@ -65,11 +73,6 @@
     <ng-container matColumnDef="Obs">
         <th mat-header-cell *matHeaderCellDef> Obs </th>
         <td mat-cell *matCellDef="let nota"> {{nota.obs}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Desconto">
-        <th mat-header-cell *matHeaderCellDef> Desconto </th>
-        <td mat-cell *matCellDef="let nota"> {{nota.desconto}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Acoes">

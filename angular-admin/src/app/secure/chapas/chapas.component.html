@@ -2,6 +2,14 @@
   <a routerLink="/chapas/criar" mat-raised-button color="primary">Adicionar chapa</a>
 </div>
 
+<div class="mt-5">
+  <mat-form-field appearance="outline">
+      <mat-label>Filtrar por Nome</mat-label>
+      <input [(ngModel)]="filterValue" (keyup)="onKeyFilter($event)" matInput placeholder="Obs">
+  </mat-form-field>
+  <button class="ml-2" mat-stroked-button (click)="cleanFilterValue()">Limpar</button>
+</div>
+
 <div *ngIf="!dataLoaded; else showData" class="spinner-border" role="status">
   <span class="sr-only">Loading...</span>
 </div>

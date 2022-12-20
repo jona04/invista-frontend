@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-  <div class="col-6">
+  <div class="col-3">
     <mat-form-field appearance="fill" class="col-12 mt-2">
       <mat-label>Escolha a data</mat-label>
       <mat-date-range-input class="col-10 float-left" [formGroup]="range" [rangePicker]="picker">
@@ -21,6 +21,14 @@
   <div class="col-6 mt-4">
     <button mat-stroked-button color="primary" [disabled]="!dataLoaded" class="mt-1" (click)="updateTable()">Atualizar tabela</button>
   </div>
+</div>
+
+<div class="mt-5">
+  <mat-form-field appearance="outline">
+      <mat-label>Filtrar por Nome</mat-label>
+      <input [(ngModel)]="filterValue" (keyup)="onKeyFilter($event)" matInput placeholder="Obs">
+  </mat-form-field>
+  <button class="ml-2" mat-stroked-button (click)="cleanFilterValue()">Limpar</button>
 </div>
 
 <div *ngIf="!dataLoaded; else showData" class="spinner-border" role="status">
