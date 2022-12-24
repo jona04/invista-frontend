@@ -8,4 +8,5 @@ export interface Nota {
     servico: Servico [];
     valor_total_nota: number;
     obs: string;
+    created_at: string;
 }

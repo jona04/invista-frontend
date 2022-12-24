@@ -49,6 +49,9 @@ img{
   font-weight: bold;
 }
 
+#assinatura {
+  margin-top: 20px;
+}
 </style>
 </head>
 
@@ -83,7 +86,7 @@ img{
             <p>Nota de Entrega:<br> {{ nota.numero }} </p>
 
             <p>
-                Data: <br>{{day}} / {{month}} / {{year}}
+                Data: <br>{{created_at | date: 'dd/MM/yyyy'}}
             </p>
         </td>
     </tr>
@@ -180,7 +183,7 @@ img{
           <p>Nota de Entrega:<br> {{ nota.numero }} </p>
 
           <p>
-              Data: <br>{{day}} / {{month}} / {{year}}
+              Data: <br>{{nota.created_at | date: 'dd/MM/yyyy'}}
           </p>
       </td>
   </tr>

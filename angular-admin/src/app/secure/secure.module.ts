@@ -39,6 +39,7 @@ import { EntradaCategoriaFormComponent } from './estoque/entrada/entrada-categor
 import { SaidaCategoriaFormComponent } from './estoque/saida/saida-categoria-form/saida-categoria-form.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreateServicoDialogComponent } from './notas/notas-form/notas-form.component';
+import { NotasRelatorioClienteComponent } from './notas/notas-relatorio-cliente/notas-relatorio-cliente.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { CreateServicoDialogComponent } from './notas/notas-form/notas-form.comp
     EntradaCategoriaFormComponent,
     SaidaCategoriaFormComponent,
     CreateServicoDialogComponent,
+    NotasRelatorioClienteComponent,
   ],
   imports: [
     CommonModule,
