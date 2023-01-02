@@ -1,3 +1,4 @@
+import { NotaService } from 'src/app/services/nota.service';
 import { LocalStorageService } from './../../../services/local-storage.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,14 +10,35 @@ import { Component, OnInit } from '@angular/core';
 export class NotasRelatorioClienteComponent implements OnInit {
 
   dataLoaded: boolean;
+  notasRelatorioCliente: any = [];
+  notasRelatorioClienteFull: any = [];
+  totalNotasRelatorio: number = 0;
 
   constructor(
-    private LocalStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private notaService: NotaService
   ) { }
 
   ngOnInit(): void {
+    this.totalNotasRelatorio = 0;
     this.dataLoaded = false;
-    console.log(this.LocalStorageService.get('notas-cliente-relatorio'));
+    this.notasRelatorioCliente = this.localStorageService.get('notas-cliente-relatorio');
+
+    this.notasRelatorioCliente.forEach(
+      (nota: any) => {
+        this.notaService.getFull(nota.id).subscribe(
+          notaFull => {
+            this.notasRelatorioClienteFull.push(notaFull);
+            console.log(this.notasRelatorioClienteFull);
+            this.totalNotasRelatorio = this.totalNotasRelatorio + notaFull.valor_total_nota
+            this.dataLoaded = true;
+          }
+        );
+      }
+    );
+
+    console.log(this.notasRelatorioCliente);
+
   }
 
 }

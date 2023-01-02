@@ -40,6 +40,9 @@ import { SaidaCategoriaFormComponent } from './estoque/saida/saida-categoria-for
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreateServicoDialogComponent } from './notas/notas-form/notas-form.component';
 import { NotasRelatorioClienteComponent } from './notas/notas-relatorio-cliente/notas-relatorio-cliente.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -86,7 +89,10 @@ import { NotasRelatorioClienteComponent } from './notas/notas-relatorio-cliente/
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule,
+    MatDividerModule,
+    MatListModule
   ]
 })
 export class SecureModule { }
