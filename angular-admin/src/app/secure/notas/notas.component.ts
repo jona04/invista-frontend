@@ -4,6 +4,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Nota } from 'src/app/interfaces/nota';
+import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { NotaService } from 'src/app/services/nota.service';
 
 @Component({
@@ -15,6 +17,7 @@ export class NotasComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  user: User;
   allNotas: Nota [] = [];
   filterValue: string;
   dataLoaded: boolean;
@@ -25,7 +28,8 @@ export class NotasComponent implements OnInit {
 
   constructor(
     private notaService: NotaService,
-    private localSorageService: LocalStorageService
+    private localSorageService: LocalStorageService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +52,12 @@ export class NotasComponent implements OnInit {
         this.dataSource.data = notas;
         this.totalNotas = notas.length;
         this.dataLoaded = true;
+      }
+    );
+
+    this.authService.user().subscribe(
+      user => {
+        this.user = user;
       }
     );
   }

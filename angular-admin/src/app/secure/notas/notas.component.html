@@ -33,6 +33,7 @@
       class="mt-1 ml-3"
       (click)="relatorioChapasData()" >Relatório Chapas/Data</button>
       <button
+      *ngIf="user.is_financeiro"
       mat-stroked-button
       color="primary"
       [disabled]="!dataLoaded"
