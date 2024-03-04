@@ -23,6 +23,7 @@ import { SaidaFormComponent } from './secure/estoque/saida/saida-form/saida-form
 import { NotasRelatorioComponent } from './secure/notas/notas-relatorio/notas-relatorio.component';
 import { ChapasFormComponent } from './secure/chapas/chapas-form/chapas-form.component';
 import { EntradaCategoriaFormComponent } from './secure/estoque/entrada/entrada-categoria-form/entrada-categoria-form.component';
+import { NotasRelatorioClienteComponent } from './secure/notas/notas-relatorio-cliente/notas-relatorio-cliente.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,7 @@ const routes: Routes = [
   },
   {path: 'notas/:id/print', component: NotasPrintComponent},
   {path: 'notas/relatorio/:start/:end', component: NotasRelatorioComponent},
+  {path: 'notas/relatorio-cliente', component: NotasRelatorioClienteComponent},
   {
     path: '',
     component: PublicComponent,

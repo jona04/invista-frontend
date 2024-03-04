@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+ <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Relatorio Nota / Cliente</title>
+<style type="text/css">
+  body{
+  margin:0;
+  }
+  .relatorio-card {
+    width: 600px;
+    margin: 0 auto 0 auto;
+  }
+
+  .data-servico {
+    font-size: 12px;
+    color: rgb(135, 135, 135);
+  }
+</style>
+</head>
+
+<body>
+<div *ngIf="!dataLoaded; else showData" class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<ng-template #showData>
+  <ng-container *ngFor="let nota of notasRelatorioClienteFull">
+    <mat-card class="relatorio-card">
+      <mat-card-header>
+        <mat-card-title>{{nota.numero}}</mat-card-title>
+        <mat-card-subtitle>{{nota.cliente_nome}} {{nota.created_at | date: 'dd/MM/yyyy HH:mm'}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <ng-container *ngFor="let servico of nota.servico">
+          <mat-list>
+            <mat-list-item>
+              <br>
+              <p><small>
+                {{ servico.nome }} - <span class="data-servico">{{servico.created_at | date: 'dd/MM/yyyy HH:mm'}}</span>
+                <br>
+                {{ servico.chapa.nome }} - {{ servico.quantidade }} - R$ {{ servico.valor_total_servico }}
+              </small></p>
+              <br>
+              <br>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </ng-container>
+      </mat-card-content>
+      <mat-card-footer>
+        <p class="text-right">Valor total nota: <strong>R$ {{nota.valor_total_nota}} </strong></p>
+      </mat-card-footer>
+    </mat-card>
+    <br>
+  </ng-container>
+  <br>
+  <h2 class="relatorio-card">Valor total Notas Selecionadas: R$ {{ totalNotasRelatorio }}</h2>
+  <br>
+</ng-template>
+</body>
+</html>

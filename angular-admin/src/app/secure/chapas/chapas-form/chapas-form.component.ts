@@ -47,6 +47,11 @@ export class ChapasFormComponent implements OnInit {
 
   submit(): void {
     this.creating = true;
+
+    if (this.create) {
+      this.form.controls['estoque'].setValue(0);
+    }
+
     const method = this.create
       ? this.chapaService.create(this.form.getRawValue())
       : this.chapaService.update(this.id, this.form.getRawValue());

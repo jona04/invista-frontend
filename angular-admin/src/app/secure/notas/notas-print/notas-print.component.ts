@@ -15,9 +15,7 @@ export class NotasPrintComponent implements OnInit {
   id: number;
   nota: Nota;
   cliente: Cliente;
-  month: any;
-  day: any;
-  year: any;
+  created_at: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -35,12 +33,9 @@ export class NotasPrintComponent implements OnInit {
             this.cliente = cliente;
           }
         );
+        this.created_at = this.nota.created_at;
       }
     );
-
-    this.month = new Date().getMonth();
-    this.day = new Date().getDate();
-    this.year = new Date().getFullYear();
   }
 
 }

@@ -1,8 +1,11 @@
+import { LocalStorageService } from './../../services/local-storage.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Nota } from 'src/app/interfaces/nota';
+import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { NotaService } from 'src/app/services/nota.service';
 
 @Component({
@@ -14,6 +17,7 @@ export class NotasComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  user: User;
   allNotas: Nota [] = [];
   filterValue: string;
   dataLoaded: boolean;
@@ -22,25 +26,38 @@ export class NotasComponent implements OnInit {
   dataSource = new MatTableDataSource();
   columns = ['Numero', 'Cliente', 'Valor Total Nota', 'Criado em', 'Obs', 'Acoes'];
 
-  constructor(private notaService: NotaService) { }
+  constructor(
+    private notaService: NotaService,
+    private localSorageService: LocalStorageService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.dataLoaded = false;
-    var curr = new Date; // get current date
+    var curr: Date = new Date(); // get current date
+
     var last = curr.getMonth(); //current month
     var first = last - 1;
-    var firstday = new Date(curr.setMonth(first)).toISOString();
-    var lastday = new Date(curr.setMonth(last)).toISOString();
+    var firstday = new Date(curr.setMonth(first));
+    var lastday = new Date(curr.setMonth(last));
+    lastday.setFullYear(2023);
+
     this.range = new FormGroup({
       start: new FormControl(firstday),
       end: new FormControl(lastday),
     });
-    this.notaService.allList(this.range.value['start'], this.range.value['end']).subscribe(
+    this.notaService.allList(this.range.value['start'].toISOString(), this.range.value['end'].toISOString()).subscribe(
       notas => {
         this.allNotas = notas;
         this.dataSource.data = notas;
         this.totalNotas = notas.length;
         this.dataLoaded = true;
+      }
+    );
+
+    this.authService.user().subscribe(
+      user => {
+        this.user = user;
       }
     );
   }
@@ -78,8 +95,8 @@ export class NotasComponent implements OnInit {
   }
 
   onKeyFilter(event?: any): void {
-    this.dataSource.data = this.allNotas.filter((nota: any) => 
-      nota.cliente_nome.toLowerCase().includes(this.filterValue.toLowerCase()) || 
+    this.dataSource.data = this.allNotas.filter((nota: any) =>
+      nota.cliente_nome.toLowerCase().includes(this.filterValue.toLowerCase()) ||
       nota.numero.toString().includes(this.filterValue)
     );
     this.totalNotas = this.dataSource.data.length;
@@ -89,5 +106,18 @@ export class NotasComponent implements OnInit {
     this.filterValue = '';
     this.dataSource.data = this.allNotas;
     this.totalNotas = this.dataSource.data.length;
+  }
+
+  relatorioNotaCliente(): void {
+    this.localSorageService.set('notas-cliente-relatorio', this.dataSource.data);
+    window.open('notas/relatorio-cliente', '_blank');
+  }
+
+  printNota(id: number): void {
+    window.open(`notas/${id}/print`, '_blank');
+  }
+
+  relatorioChapasData(): void {
+    window.open(`notas/relatorio/${this.range.value['start']}/${this.range.value['end']}`, '_blank');
   }
 }
