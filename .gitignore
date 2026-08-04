@@ -1,0 +1,32 @@
+# Dependencias instaladas por engano na raiz. Cada projeto tem o proprio
+# package.json e deve ser instalado dentro da sua pasta, nao aqui.
+/node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Saida de build
+/dist
+/tmp
+/out-tsc
+
+# Cache do Angular CLI
+.angular/
+
+# Editores
+.idea/
+.project
+.classpath
+.settings/
+.vscode/*
+!.vscode/extensions.json
+.history/
+*.sublime-workspace
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Variaveis de ambiente locais
+.env
+.env.local
